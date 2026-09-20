@@ -1,49 +1,136 @@
-# ⚡ Physics-Informed Audit & TinyML Sensor Fault Isolation for Transformer Predictive Maintenance
+# ⚡ Physics-Informed Audit of Transformer Telemetry: 
+# Why "OTI Trip" Labels May Reflect Sensor Faults, Not Thermal Events
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![TinyML](https://img.shields.io/badge/TinyML-Edge--AI-brightgreen.svg)]()
-[![Domain](https://img.shields.io/badge/Domain-Predictive%20Maintenance-red.svg)]()
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![Status](https://img.shields.io/badge/Result-Negative%20(documented)-orange.svg)]()
 
-> **Critical Discovery:** A physics-informed thermodynamic audit proving that $99\%+$ accuracy Predictive Maintenance (PdM) models trained on public transformer telemetry are overfitting on **sensor/ADC railing glitches** rather than actual thermal degradation. Includes a ultra-lightweight ($O(1)$) Stage-1 TinyML C++ filter for edge devices.
-
----
-
-## 📌 Executive Summary
-
-Many machine learning models targeting Transformer Oil Temperature Indicator (`OTI`) trip flags achieve near-perfect accuracy ($99\%+$). However, applying **First-Principles Thermodynamics** (IEC 60076-7 ODEs) and rigorous statistical checks on field telemetry reveals that the high-temperature trips ($\ge 236^\circ\text{C}$) are **sensor artifacts (ADC Upper Railing / Upscale Burnout)** rather than physical oil overheating.
-
-### Key Findings:
-1. **Strict Mathematical Separability:** The Trip Flag (`OTI_T`) is deterministically mapped to $(\text{OTI} \ge 236^\circ\text{C})$ across $100\%$ of data points ($19,376$ rows). ML models simply learn `if OTI >= 236` instead of thermal dynamics.
-2. **Physically Impossible Bimodality Gap:** There is a **$166^\circ\text{C}$ void gap** ($70^\circ\text{C}$ to $236^\circ\text{C}$) containing **zero readings**, proving an electronic step-discontinuity rather than gradual thermal heating.
-3. **Cooling Impossibility:** Dropping from $248^\circ\text{C}$ to $52^\circ\text{C}$ in $8\text{ minutes}$ requires **$232.7\text{ kW}$** of cooling power in a standard Natural Oil Natural Air (ONAN) transformer—a thermodynamic impossibility for passive cooling with a 2-3 hour thermal time constant.
-4. **Pessimistic Heating Bound:** Even if $100\%$ of total electrical power ($98.7\text{ kW}$) dissipated instantly as heat into the $300\text{ kg}$ oil mass, maximum possible heating is $+20.8^\circ\text{C}/2\text{ min}$, whereas telemetry shows $+182^\circ\text{C}$.
+> **Scope note (read first):** This repository documents a *data-centric
+> audit* of a public transformer-monitoring dataset. Its core claim is
+> narrow and defensible: the high-temperature "trip" labels (`OTI_T`) are
+> **inconsistent with a physical top-oil thermal transient** and are most
+> plausibly a **measurement-chain / telemetry anomaly**. We deliberately do
+> NOT claim a confirmed hardware root cause, because the dataset provides no
+> nameplate, thermal-mass, cooling-class, sensor-type, or protection-logic
+> metadata.
 
 ---
 
-## 🔬 Thermodynamic Proofs & Physics Bounds
+## 1. Evidence Tiering (important)
 
-### 1. The Cooling Impossibility Proof
-For an estimated oil mass $m = 300\text{ kg}$ and specific heat capacity $c = 1900\text{ J/kg}\cdot^\circ\text{C}$:
-$$\Delta T = -196^\circ\text{C} \quad \text{in } 8\text{ minutes } (480\text{ s})$$
-$$Q_{\text{released}} = m \cdot c \cdot \Delta T = 300 \times 1900 \times 196 \approx 111.72\text{ MJ}$$
-$$P_{\text{cooling}} = \frac{111.72\text{ MJ}}{480\text{ s}} \approx \mathbf{232.7\text{ kW}}$$
+Every finding below is tagged by how strongly the data supports it:
 
-*An ONAN transformer dissipating $232.7\text{ kW}$ passively in 8 minutes violates fundamental heat transfer limits.*
-
-### 2. Empirical Rate-of-Change Calibration ($\vert{}d\text{OTI}/dt\vert{}$)
-Statistical distribution of temperature rate of change across $19,376$ telemetry samples:
-
-| Operation State | Rate Metrics | Value |
-| :--- | :--- | :--- |
-| **Quiet Operation** ($\text{OTI} < 150^\circ\text{C}$) | Median | $0.067^\circ\text{C}/\text{min}$ |
-| | 99th Percentile ($p99$) | $0.333^\circ\text{C}/\text{min}$ |
-| | **99.9th Percentile ($p99.9$)** | **$2.000^\circ\text{C}/\text{min}$** |
-| **Glitch / Artifact Events** ($\text{OTI} > 200^\circ\text{C}$) | Average Glitch Rate | $8.20^\circ\text{C}/\text{min}$ |
-| | **Max Recorded Glitch Rate** | **$91.00^\circ\text{C}/\text{min}$** |
+- **[DATA]** — provable directly from the raw files; independent of transformer specs.
+- **[PHYS-COND]** — supported by physics under stated, conservative assumptions.
+- **[HYP]** — plausible engineering hypothesis; NOT proven; needs field data.
 
 ---
 
-## 🛠️ TinyML Stage-1 Architecture (Edge Isolation)
+## 2. Findings
 
-Instead of running heavy ML models on corrupted input, we propose a two-stage edge architecture deployable on low-power microcontrollers (STM32, ESP32, Cortex-M0):
+### [DATA] Strict separability of the trip flag
+`OTI_T = 1` occurs iff `OTI >= 236 °C` across 100% of rows (n = 19,376).
+=> Any *same-timestep* classifier that ingests `OTI` (or a direct transform
+of it) can reach ~99% accuracy by learning a trivial threshold. This is
+target triviality/leakage, not learned thermal dynamics.
+
+### [DATA] Bimodal observation gap
+Zero readings exist in the 70–236 °C band (a 166 °C void). Physical heating
+would necessarily traverse this band. A complete gap is characteristic of a
+two-state / saturating digital behaviour.
+
+### [DATA] No coincident electrical disturbance
+During each OTI excursion, VL1–VL3 (~220 V), line-to-line (~380 V), and
+IL1–IL3 (~136–170 A) remain stable; WTI and OLI do not move. Only the OTI
+channel changes. (Cross-checked against CurrentVoltage.csv.)
+
+### [DATA] High autocorrelation
+OTI lag-1 r ≈ 0.86 => random shuffling of train/test causes leakage; only
+block/temporal splits are valid.
+
+### [PHYS-COND] Heating is energetically impossible (critical-mass form)
+Using the *measured* load only:
+  m_crit = P·Δt / (c·ΔT) = 102,969 W × 120 s / (1900 J/kg·K × 182 K) ≈ 35.7 kg
+Even assuming 100% of measured electrical power converts to heat inside the
+oil (physically impossible), no more than ~35.7 kg of oil could rise 182 °C
+in 2 min. Independently sourced specs for 100–250 kVA distribution
+transformers indicate oil mass on the order of ~150–370 kg (≈1.4–1.6 L/kVA,
+density ≈0.89 kg/L). Since the lower bound (~150 kg) exceeds m_crit by >4×,
+the observed rise is energetically impossible across the entire plausible
+rating range. (No single oil-mass value is assumed.)
+
+### [PHYS-COND] Cooling implies an impossible time constant (scale-independent)
+Fitting an exponential decay to the 248→52 °C drop over 8 min (Ta ≈ 39 °C):
+  τ_apparent ≈ 2.9 min
+This is ~2 orders of magnitude below the multi-hour oil time constants used
+in IEC 60076-7 / reported for ONAN distribution transformers. This argument
+does not depend on oil mass at all.
+
+### [HYP] Candidate hardware causes (NOT proven)
+Consistent-with, but unconfirmed: RTD/transmitter open-circuit with upscale
+burnout; ADC upper-rail saturation near ~250 °C; RC-filtered step response
+(236 °C then 248 °C); daytime clustering suggesting an environmental/thermal
+covariate at the marshalling box. Confirmation requires device metadata or
+physical inspection.
+
+---
+
+## 3. Asset Parameter Estimation (transparent, bounded)
+
+The dataset gives no nameplate. We estimate, with explicit tolerances:
+
+| Parameter          | Estimate            | Basis / Confidence            |
+|--------------------|---------------------|-------------------------------|
+| Observed load      | ~100 kVA            | [DATA] measured V·I and KVA   |
+| Nameplate rating   | 100–250 kVA         | [HYP] IS-1180 sizes + loading |
+| Cooling class      | ONAN (likely)       | [HYP] typical for this class  |
+| Oil mass           | ~150–370 kg         | [PHYS-COND] mfr specs, ±range |
+| Oil c              | ~1900 J/kg·K        | mineral-oil literature value  |
+| Oil density        | ~0.89 kg/L          | IEC 60296 typical             |
+| Oil time constant  | order of hours      | IEC 60076-7 / literature      |
+
+All physics claims are stated so they hold across these ranges, not at a
+single assumed point.
+
+---
+
+## 4. Implication for TinyML
+
+Do NOT train a heavy model to "predict OTI_T". Instead, a Stage-1 sensor-
+integrity check flags implausible dynamics on-device:
+
+    |ΔOTI/Δt| > threshold   (calibrated from data; see Section 5)
+
+Empirical calibration (from this dataset):
+  - Quiet operation |dOTI/dt|: median 0.067, p99 0.333, p99.9 2.0 °C/min
+  - Glitch events: mean 8.2, max 91 °C/min
+A threshold near 2.0 °C/min separates the two populations cleanly.
+(Note: rate must be computed with the ACTUAL Δt between samples, since
+telemetry is event-triggered and Δt varies from 1–15 min.)
+
+---
+
+## 5. Repro
+
+    python audit_transformer_data.py        # sampling, onsets, autocorrelation
+    python build_episode_table.py           # NOTE: set gap_tolerance carefully (see below)
+    python fit_thermal_model.py             # IEC 60076-7 top-oil ODE on quiet data
+    python inspect_raw_oti.py               # raw-line inspection around episodes
+    python verify_glitch_authenticity.py    # plain-text + V/I cross-check
+    python reviewer_audit_checks.py         # separability, histogram, rate percentiles
+
+---
+
+## 6. Known limitations
+- Single dataset; no nameplate/field metadata.
+- Root cause is hypothesised, not confirmed.
+- Episode counts depend on `gap_tolerance` (see Section 7).
+
+---
+
+## 7. Correction log (transparency)
+- Removed fixed oil-mass assumption (300 kg) and the derived 232.7 kW figure;
+  replaced with critical-mass (35.7 kg) and time-constant (2.9 min) arguments.
+- Reclassified all hardware-specific claims (PT100, ONAN, ADC rail) as [HYP].
+- Flagged episode-merge sensitivity (E09/E10 were two glitches merged by a
+  6 h tolerance window).
