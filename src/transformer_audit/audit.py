@@ -161,7 +161,12 @@ def onset_counts(df: pd.DataFrame, flags: Iterable[str], policy: str = "first") 
 
 
 def onset_counts_policy_sensitivity(df: pd.DataFrame, flags: Iterable[str],
-                                    policies: Iterable[str] = ("first", "last", "mean")) -> pd.DataFrame:
+                                    policies: Iterable[str] = ("first", "last", "identical")) -> pd.DataFrame:
+    """Onset counts under non-destructive record policies.
+
+    Phase-2 rule: 'mean' is NOT used — averaging binary flags across
+    conflicting records can create states that never physically existed.
+    """
     frames = [onset_counts(df, flags, policy=p) for p in policies]
     return pd.concat(frames, ignore_index=True)
 

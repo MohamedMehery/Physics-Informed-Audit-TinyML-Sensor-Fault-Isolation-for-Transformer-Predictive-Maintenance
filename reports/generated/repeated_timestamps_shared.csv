@@ -1,0 +1,11 @@
+file_a,file_b,repeated_groups_a,repeated_groups_b,shared_repeated_timestamps
+CurrentVoltage.csv,Overview.csv,437,931,420
+CurrentVoltage.csv,Power.csv,437,438,410
+CurrentVoltage.csv,PowerFactor.csv,437,431,374
+CurrentVoltage.csv,TotalPower.csv,437,406,284
+Overview.csv,Power.csv,931,438,406
+Overview.csv,PowerFactor.csv,931,431,376
+Overview.csv,TotalPower.csv,931,406,290
+Power.csv,PowerFactor.csv,438,431,390
+Power.csv,TotalPower.csv,438,406,292
+PowerFactor.csv,TotalPower.csv,431,406,317

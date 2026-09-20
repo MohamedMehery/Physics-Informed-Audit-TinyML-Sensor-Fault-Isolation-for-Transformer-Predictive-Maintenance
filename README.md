@@ -1,14 +1,46 @@
 # Transformer Monitoring Dataset — Evidence-First Audit
 
-**Status: Phase 1 — data and provenance audit** (complete; see
-`reports/phase_01_handoff.md`)
+**Status: Phase 2 — single-asset validity, source lineage, and conditional
+physics** (complete; see `reports/phase_02_report.md` and
+`reports/phase_02_handoff.md`; Phase 1 data/provenance audit also complete,
+`reports/phase_01_report.md`)
 
 An evidence-first investigation of the public Kaggle dataset
 **"Distributed Transformer Monitoring"**, focused on data quality,
 provenance, asset identity, and reproducible characterization of the
-recorded alarm/excursion behavior. This repository deliberately separates
-what is *known* from what is *unknown*, and does not claim any hardware
-root cause.
+recorded alarm/excursion behavior. **Phase 2 investigates whether the
+published rows form a valid time series for one physical transformer** —
+examining the dataset authors' paper and downstream users in full text,
+analyzing repeated-timestamp records without averaging or discarding them,
+and bounding the abrupt OTI transitions with assumption-labeled (conditional)
+physics. This repository deliberately separates what is *known* from what is
+*unknown*, and does not claim any hardware root cause.
+
+**Phase-2 headline results:**
+
+- **Lineage closed:** the audited archive was uploaded by the first author of
+  Putchala et al. 2022 (Springer, ICCCE/ICACES), and the Energies 15(21):7981
+  study used this same dataset (its Data Availability Statement names it).
+  The paper's live-stream description (KernelSphere, Tripura, 52 locations,
+  from Nov 2020) covers a *later* window than the export (2019-06-25 …
+  2020-04-14); platform attribution of the export remains an inference.
+- **Entity unresolved (required statement):** *The published dataset does not
+  provide enough information to establish that adjacent rows belong to the
+  same physical transformer.*
+- **Repeats:** 406–931 repeated-timestamp groups per file (2.3–4.8 % of
+  timestamps), synchronized across files, raw-line adjacent, near-identical
+  in value, never containing the 47 high-OTI records — most consistent with
+  ingestion/export re-transmission for the repeats; no support for
+  multi-asset or multi-feeder structure.
+- **Policy invariance:** under P1/P2/P3/P4 record policies the excursion
+  findings do not change (10 rising transitions, OTI_T rule 100 %, empty
+  interval (54, 236), rates +91.0/−40.8 OTI-units/min).
+- **Conditional physics:** under an explicit extreme bound (100 % of
+  observed load power into the oil), the observed 182–206-unit rises in
+  2–18 min imply effective thermal masses of ~32–426 kg — far below
+  distribution-class oil masses; plausible masses need sustained 0.1–4.9 MW
+  vs 0.142 MW observed. Apparent channel recovery τ = 0.5–26 min. No root
+  cause claimed; sampled data cannot exclude unobserved sub-interval events.
 
 ## Dataset (primary source)
 
@@ -73,17 +105,22 @@ Tested environment (recorded in `reports/generated/phase_01_summary.json`):
 Python 3.13.14, pandas 2.2.3, numpy 2.3.5, Linux x86_64.
 
 ```bash
-python -m pip install -e ".[test]"   # install package + pytest
-python scripts/download_dataset.py   # official Kaggle download; verifies hash;
-                                     # extracts raw/ (gitignored); writes manifest
-python scripts/run_data_audit.py     # full audit -> reports/generated/*.csv|json
-python -m pytest                     # 39 synthetic-fixture unit tests
+python -m pip install -e ".[test]"       # install package + pytest
+python scripts/download_dataset.py       # official Kaggle download; verifies hash;
+                                         # extracts raw/ (gitignored); writes manifest
+python scripts/run_data_audit.py         # Phase-1 audit -> reports/generated/*.csv|json
+python scripts/run_phase2_analysis.py    # Phase-2 analysis -> generated CSVs + figures
+python scripts/independent_raw_verification.py  # stdlib-only recomputation; 56 checks;
+                                                 # exits non-zero on any disagreement
+python -m pytest                         # 69 synthetic-fixture unit tests
 ```
 
-`run_data_audit.py` verifies raw-file SHA-256 hashes against the manifest
-**before and after** the run and aborts on any mismatch (raw files are never
-modified). All rates use actual timestamp differences, never an assumed
-15-minute cadence.
+`run_data_audit.py` and `run_phase2_analysis.py` verify raw-file SHA-256
+hashes against the manifest **before and after** the run and abort on any
+mismatch (raw files are never modified). All rates use actual timestamp
+differences, never an assumed 15-minute cadence. Tested environment:
+Python 3.13.14, pandas 2.2.3, numpy 2.3.5, matplotlib 3.10.9, Linux x86_64
+(also recorded in `reports/generated/phase_0{1,2}_summary.json`).
 
 ## Repository structure
 
@@ -98,15 +135,30 @@ docs/
   archive/                    archive slot for the prior README (none existed; see file)
 provenance/
   dataset_manifest.json       dataset metadata, archive+file hashes
-  source_register.csv         all sources (S1–S10), primary/secondary
-src/transformer_audit/        io, timestamps, provenance, audit, events, electrical
-scripts/                      download_dataset.py, run_data_audit.py
-tests/                        39 unit tests (synthetic fixtures only)
+  source_register.csv         all sources (S1–S16), primary/secondary
+src/transformer_audit/        io, timestamps, provenance, audit, events,
+                              electrical, records (Phase 2), physics (Phase 2)
+scripts/
+  download_dataset.py         official download + hash verify + manifest
+  run_data_audit.py           Phase-1 audit
+  run_phase2_analysis.py      Phase-2 analysis (artifacts + figures)
+  independent_raw_verification.py  stdlib-only cross-check (56 checks)
+tests/                        69 unit tests (synthetic fixtures only)
+docs/outreach_requests.md     provider/uploader question drafts — NOT SENT
 reports/
-  asset_identity_evidence.md  asset-identity investigation
+  asset_identity_evidence.md  asset-identity investigation (Phase 1)
   phase_01_report.md          detailed Phase-1 report
-  phase_01_handoff.md         compact handoff
-  generated/                  machine-readable audit outputs (CSV/JSON)
+  phase_01_handoff.md         compact Phase-1 handoff
+  phase_01_code_review.md     Phase-1 code review (mean-policy fix)
+  source_lineage_report.md    Phase-2 full-text lineage triangle
+  asset_scope_and_entity_analysis.md  H1–H5 assessment; required statement
+  variable_semantics_report.md        per-channel semantics; unit discipline
+  asset_parameter_bounds.md           parameters + official manufacturer envelope
+  conditional_physics_analysis.md     assumption-labeled energy/tau bounds
+  phase_02_report.md         detailed Phase-2 report (13 sections)
+  phase_02_handoff.md        compact Phase-2 handoff
+  figures/                   physics bounds figures (PNG)
+  generated/                 machine-readable audit outputs (CSV/JSON)
 ```
 
 ## Confirmed findings (Phase 1) — all reproducible

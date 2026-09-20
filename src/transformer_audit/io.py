@@ -66,25 +66,40 @@ def canonicalize(
     policy: str = "first",
     sort: bool = True,
 ) -> pd.DataFrame:
-    """Reduce duplicate timestamps to one canonical record per timestamp.
+    """Reduce repeated-timestamp records to one canonical record per timestamp.
 
     Policies:
       - 'first': keep the first raw-line occurrence (default);
       - 'last': keep the last raw-line occurrence;
-      - 'mean': mean of numeric sensor values across the group
-        (flags rounded to the group mean, reported as a fractional value).
+      - 'identical': collapse only groups whose sensor values are identical,
+        retaining every branch of conflicting groups (Phase-2 policy P4);
+      - 'preserve': keep every record (Phase-2 policy P1; the result is NOT
+        one-record-per-timestamp);
+      - 'mean': mean of numeric sensor values across the group.
 
-    The duplicate analysis (duplicate_timestamp_report) must be run and
-    reported BEFORE any canonicalization is used for downstream statistics.
+    WARNING (Phase-2 code review): the 'mean' policy averages values across
+    CONFLICTING records — for binary flags this can create states that never
+    physically existed. It is retained only for numeric channels with
+    explicit caller awareness and is no longer used for flag statistics.
+
+    The duplicate analysis (duplicate_timestamp_report /
+    repeated_group_report) must be run and reported BEFORE any
+    canonicalization is used for downstream statistics.
     """
-    if policy not in ("first", "last", "mean"):
+    if policy not in ("first", "last", "identical", "preserve", "mean"):
         raise ValueError(f"unknown duplicate policy: {policy}")
     df = df.copy()
     if sort:
         df = df.sort_values(PARSED_TS_COLUMN, kind="stable")
+    if policy == "preserve":
+        return df.reset_index(drop=True)
     if policy in ("first", "last"):
         keep = "first" if policy == "first" else "last"
         return df.drop_duplicates(subset=[PARSED_TS_COLUMN], keep=keep).reset_index(drop=True)
+    if policy == "identical":
+        cols = sensor_columns(df)
+        out = df.drop_duplicates(subset=[PARSED_TS_COLUMN] + cols, keep="first")
+        return out.reset_index(drop=True)
     # mean policy
     cols = sensor_columns(df)
     agg = {c: "mean" for c in cols}

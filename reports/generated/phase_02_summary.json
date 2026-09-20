@@ -1,0 +1,88 @@
+{
+  "phase2_run_utc": "2026-09-20T21:46:05Z",
+  "provenance_gate": "PASS (pre-run; post-run verified below)",
+  "repeated_records": {
+    "overview_repeated_groups": 931,
+    "overview_identical": 568,
+    "overview_conflicting": 363,
+    "high_oti_rows_in_repeated_groups": 0,
+    "per_record_oti_t_rule_violations": 0,
+    "monthly_repeated_groups": {
+      "2019-06": 448,
+      "2019-07": 84,
+      "2019-08": 67,
+      "2019-09": 55,
+      "2019-10": 61,
+      "2019-11": 53,
+      "2019-12": 20,
+      "2020-01": 26,
+      "2020-02": 39,
+      "2020-03": 34,
+      "2020-04": 44
+    }
+  },
+  "entity": {
+    "occurrence_stream_supported": false,
+    "vl1_contiguous_band_clusters": 1,
+    "neighbor_fit_first_vs_last": [
+      4.75,
+      4.6
+    ]
+  },
+  "oti_ati_correlation": {
+    "canonical_all": 0.5527572502445057,
+    "canonical_normal_band_only": 0.940253240689446,
+    "paper_reported_putchala": 0.914,
+    "note": "paper value computed on their Nov2020+ 52-location live stream, not this export"
+  },
+  "policy_sensitivity": [
+    {
+      "policy": "P1_preserve",
+      "n_records": 20316,
+      "n_unique_timestamps": 19376,
+      "high_oti_rising_transitions": 10,
+      "oti_t_rule_accuracy": 1.0,
+      "empty_oti_intervals_gt5": "(0,9);(54,236)",
+      "max_positive_rate_per_min": 91.0,
+      "max_negative_rate_per_min": -40.8,
+      "n_oti_t_primitive_events_gap30": 10,
+      "n_intervals_excluded_nonpositive": 940
+    },
+    {
+      "policy": "P2_first",
+      "n_records": 19376,
+      "n_unique_timestamps": 19376,
+      "high_oti_rising_transitions": 10,
+      "oti_t_rule_accuracy": 1.0,
+      "empty_oti_intervals_gt5": "(0,11);(54,236)",
+      "max_positive_rate_per_min": 91.0,
+      "max_negative_rate_per_min": -40.8,
+      "n_oti_t_primitive_events_gap30": 10,
+      "n_intervals_excluded_nonpositive": 0
+    },
+    {
+      "policy": "P3_last",
+      "n_records": 19376,
+      "n_unique_timestamps": 19376,
+      "high_oti_rising_transitions": 10,
+      "oti_t_rule_accuracy": 1.0,
+      "empty_oti_intervals_gt5": "(0,9);(54,236)",
+      "max_positive_rate_per_min": 91.0,
+      "max_negative_rate_per_min": -40.8,
+      "n_oti_t_primitive_events_gap30": 10,
+      "n_intervals_excluded_nonpositive": 0
+    },
+    {
+      "policy": "P4_identical",
+      "n_records": 19742,
+      "n_unique_timestamps": 19376,
+      "high_oti_rising_transitions": 10,
+      "oti_t_rule_accuracy": 1.0,
+      "empty_oti_intervals_gt5": "(0,9);(54,236)",
+      "max_positive_rate_per_min": 91.0,
+      "max_negative_rate_per_min": -40.8,
+      "n_oti_t_primitive_events_gap30": 10,
+      "n_intervals_excluded_nonpositive": 366
+    }
+  ]
+}

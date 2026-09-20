@@ -1,0 +1,5 @@
+policy,n_records,n_unique_timestamps,high_oti_rising_transitions,oti_t_rule_accuracy,empty_oti_intervals_gt5,max_positive_rate_per_min,max_negative_rate_per_min,n_oti_t_primitive_events_gap30,n_intervals_excluded_nonpositive
+P1_preserve,20316,19376,10,1.0,"(0,9);(54,236)",91.0,-40.8,10,940
+P2_first,19376,19376,10,1.0,"(0,11);(54,236)",91.0,-40.8,10,0
+P3_last,19376,19376,10,1.0,"(0,9);(54,236)",91.0,-40.8,10,0
+P4_identical,19742,19376,10,1.0,"(0,9);(54,236)",91.0,-40.8,10,366

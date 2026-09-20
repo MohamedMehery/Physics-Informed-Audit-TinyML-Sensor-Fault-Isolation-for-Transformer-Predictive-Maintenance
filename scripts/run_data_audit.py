@@ -134,7 +134,7 @@ def main() -> int:
     ov_dist = value_distribution(ov, ["OTI", "WTI", "ATI", "OLI", "OTI_A", "OTI_T", "MOG_A"])
     ov_dist.to_csv(OUT / "overview_value_distributions.csv", index=False)
 
-    onsets = onset_counts_policy_sensitivity(ov, FLAGS, policies=("first", "last", "mean"))
+    onsets = onset_counts_policy_sensitivity(ov, FLAGS, policies=("first", "last", "identical"))
     onsets.to_csv(OUT / "alarm_summary.csv", index=False)
 
     sep = pd.concat([

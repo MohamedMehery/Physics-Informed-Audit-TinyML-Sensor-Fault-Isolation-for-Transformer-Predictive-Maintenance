@@ -28,6 +28,18 @@ from .audit import (
 )
 from .events import primitive_events, merge_events, event_sensitivity
 from .electrical import apparent_power_estimates, power_approximation_errors, excursion_electrical_context
+from . import records
+from . import physics
+from .records import (
+    multiplicity_table, repeated_timestamps_shared, repeated_group_report,
+    conflict_summary, high_oti_repeated_intersection, per_record_flag_consistency,
+    apply_policy, policy_metrics, policy_sensitivity, occurrence_report,
+    neighbor_continuity_fit, value_band_unimodality, POLICIES,
+)
+from .physics import (
+    energy_kj, critical_mass_kg, required_power_kw, achievable_delta_t_units,
+    apparent_time_constant_minutes, tau_domain_status, tau_sensitivity,
+)
 
 __all__ = [
     "read_table", "canonicalize", "RAW_TS_COLUMN", "PARSED_TS_COLUMN", "RAW_LINE_COLUMN",
@@ -40,4 +52,11 @@ __all__ = [
     "primitive_events", "merge_events", "event_sensitivity",
     "apparent_power_estimates", "power_approximation_errors",
     "excursion_electrical_context",
+    "records", "physics",
+    "multiplicity_table", "repeated_timestamps_shared", "repeated_group_report",
+    "conflict_summary", "high_oti_repeated_intersection", "per_record_flag_consistency",
+    "apply_policy", "policy_metrics", "policy_sensitivity", "occurrence_report",
+    "neighbor_continuity_fit", "value_band_unimodality", "POLICIES",
+    "energy_kj", "critical_mass_kg", "required_power_kw", "achievable_delta_t_units",
+    "apparent_time_constant_minutes", "tau_domain_status", "tau_sensitivity",
 ]

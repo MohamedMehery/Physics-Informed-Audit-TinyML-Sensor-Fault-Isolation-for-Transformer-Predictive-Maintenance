@@ -1,0 +1,6 @@
+repeated_groups,identical_groups,conflicting_groups,groups_with_flag_conflicts,median_max_conflict_magnitude,max_conflict_magnitude,all_groups_raw_line_adjacent,filename
+437,32,405,0,0.30000000000001137,25.599999999999994,True,CurrentVoltage.csv
+931,568,363,17,0.0,33.0,True,Overview.csv
+438,429,9,0,0.0,2.6999999999999993,True,Power.csv
+431,1,430,0,6.6000000000000085,123.5,True,PowerFactor.csv
+406,393,13,0,0.0,36.60000000002037,True,TotalPower.csv

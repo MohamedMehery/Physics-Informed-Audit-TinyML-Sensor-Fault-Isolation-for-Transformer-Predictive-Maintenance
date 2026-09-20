@@ -7,7 +7,7 @@ OTI_A,last,100,11,11
 OTI_T,last,47,10,10
 MOG_A,last,2087,5,5
 WTI,last,5381,288,287
-OTI_A,mean,100,11,11
-OTI_T,mean,47,10,10
-MOG_A,mean,2087,5,5
-WTI,mean,5376,277,278
+OTI_A,identical,100,11,11
+OTI_T,identical,47,10,10
+MOG_A,identical,2127,5,5
+WTI,identical,5429,296,295

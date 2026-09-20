@@ -1,0 +1,14 @@
+parameter,value,evidence_class,source,assumptions,confidence,physics_use
+number of transformers in export,UNKNOWN,missing,no device/asset column; provider platform = 52 locations (S2 Sec. 4),none allowed,n/a,NO
+number of devices in export,UNKNOWN,missing,no device column; multiplicity structure (2.3-4.9% repeated timestamps) inconsistent with constant second stream,none allowed,n/a,NO
+number of feeders,UNKNOWN,missing,single VL/IL triple per timestamp; no feeder ID,none allowed,n/a,NO
+nameplate rating (kVA),UNKNOWN (unbounded above; no lower bound beyond observed loading),missing,"1500 kVA figure belongs to S3's own system, NOT this export; 142.9 kVA observed load establishes nothing about rating",observed loading != nameplate,n/a,NO (parameterized scenarios only)
+voltage ratio,UNKNOWN; secondary side measured ~240 V phase / ~415-445 V line,observed (secondary only),CurrentVoltage.csv ranges,nominal ratio cannot be inferred without primary-side measurement,"high (measured), low (inference)",context only
+oil volume / oil mass,UNKNOWN — no official per-rating table obtained,missing,S11/S12/S13 official pages lack per-rating oil volumes; reseller tables rejected,parameterized 50..3000 kg effective thermal mass in physics,n/a,PARAMETERIZED
+cooling mode,UNKNOWN for THIS asset; ONAN typical class for the envelope (S11/S12),SECONDARY envelope,ETT + BSES specs,not transferred to dataset asset,n/a for asset,NO
+OTI unit,UNCONFIRMED ('OTI units'),missing,no primary source states the unit; °C-scale readings of 236-250 exceed documented operating bands,all physics uses 'OTI units',n/a,CONDITIONAL
+sampling cadence,15-min median; observed 1-9 min intervals; 33.6-day gap 2019-07/08,observed,this export (Phase-1 interval summary),device-side aggregation unknown,high,YES (dt in formulas)
+max observed load,142.9 kVA / 142.1 kW (2020-01-27),observed,TotalPower.csv,"instantaneous sample, not continuous",high,YES (scenario bound)
+losses / heat generation,UNKNOWN; parameterized 0-100% of load power,missing,"no nameplate, no test report",100%-to-oil used ONLY as extreme upper bound,n/a,PARAMETERIZED
+ambient temperature channel,"ATI 0-44 (unit unconfirmed, °C-consistent)",observed,Overview.csv,used as ambient proxy in tau analysis with +/-5 sensitivity,medium,YES (conditional)
+effective thermal mass range for scenarios,"50-3000 kg (scenario grid, NOT a claim)",parameterized,covers distribution-transformer-scale oil+structure; no asset-specific value asserted,grid only,n/a,PARAMETERIZED

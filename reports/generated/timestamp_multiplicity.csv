@@ -1,0 +1,13 @@
+filename,records_per_timestamp,n_timestamps,share_of_timestamps_pct
+CurrentVoltage.csv,1,18478,97.69
+CurrentVoltage.csv,2,437,2.31
+Overview.csv,1,18445,95.195
+Overview.csv,2,923,4.764
+Overview.csv,3,7,0.036
+Overview.csv,4,1,0.005
+Power.csv,1,18433,97.679
+Power.csv,2,438,2.321
+PowerFactor.csv,1,18446,97.717
+PowerFactor.csv,2,431,2.283
+TotalPower.csv,1,18436,97.845
+TotalPower.csv,2,406,2.155

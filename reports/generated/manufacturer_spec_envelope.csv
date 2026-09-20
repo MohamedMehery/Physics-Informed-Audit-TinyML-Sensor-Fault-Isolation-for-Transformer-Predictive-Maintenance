@@ -1,0 +1,8 @@
+manufacturer_spec,official,oil_volume,total_mass_kg,relevance
+"ETT 200 kVA 11/0.433 kV ONAN, IS 1180/IS 2026",True,not published on page,not published for 200 kVA,11 kV-class DT envelope exists in Indian market
+ETT 315 kVA 11/0.433 kV ONAN,True,not published,not published,envelope
+ETT 1000 kVA (1 MVA) 11 kV/433 V,True,not published,4065,mass scale reference for 11 kV DTs
+ETT 1600 kVA (1.6 MVA) 11/0.433 kV,True,not published,6026,mass scale reference
+"BSES Delhi SP-TRDU-02-02: 400/630/1000 kVA, 11/0.433 kV, ONAN, class A, 50 C design ambient, IS 2026/IS 1180; WTI/OTI scanner (Pecon/Precision) + MOG listed as standard accessories",True,Annexure D (not parsed — beyond 30-page limit),in Annexure D,confirms WTI/OTI/MOG channels are standard DT instrumentation in this market
+Bharat Bijlee: DTs up to 200 MVA/400 kV range (corporate brochure),True,not published,not published,"manufacturer confirmation only, no per-rating data"
+"IS 1180:2014 Part 1 scope: oil-immersed DTs up to 2500 kVA, 33 kV class",True,n/a,n/a,standard scope; per-rating values NOT taken from unofficial sources
