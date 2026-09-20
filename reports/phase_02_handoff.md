@@ -119,14 +119,29 @@ sensitivity curves; no "proven sensor fault"/"thermal impossibility"/
 "TinyML" phrasing; actual Δt rates; entity-unresolved statement mandatory;
 outreach drafts stored but not sent.
 
+## Repository status and GitHub merge
+
+- Phase-2 work committed on a clean tree: **`2aab096`** (main Phase-2
+  commit) and **`8762ddb`** (spec alignment: claim-matrix columns, outreach
+  targets), on top of Phase-1 commits `76b64ab` and `9d73ab2`. Full suite
+  re-verified at each commit.
+- **GitHub merge: NOT yet performed.** The workspace has no git remote, no
+  `gh` CLI, no SSH keys, and no stored credentials or tokens (verified), so
+  pushing requires owner credentials or authorization. To merge yourself:
+  `git remote add origin <YOUR_REPO_URL> && git push -u origin main` — or
+  provide the repository URL plus a personal access token (repo/push scope)
+  and the merge will be completed on request.
+
 ## Next steps (require owner input)
 
-1. **Authorization** to send any of the four outreach drafts
-   (`docs/outreach_requests.md`) to KernelSphere / the dataset uploader /
-   the mirror uploader — the only route to entity scope, channel units, and
-   asset parameters.
-2. Any provider answers would upgrade variable semantics and the
+1. **GitHub merge** — provide the remote URL and credentials, or push with
+   the command above.
+2. **Authorization** to send any of the outreach drafts
+   (`docs/outreach_requests.md`; four required targets + optional mirror
+   draft) — the only route to entity scope, channel units, and asset
+   parameters.
+3. Any provider answers would upgrade variable semantics and the
    conditional physics from parameterized to asset-specific.
-3. Optional: byte-comparison with the Energies-reported preprocessing
+4. Optional: byte-comparison with the Energies-reported preprocessing
    (their internal row counts 17,207/17,640 do not match the file row
    counts — their preprocessing is undocumented).
