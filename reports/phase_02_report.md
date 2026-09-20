@@ -22,7 +22,7 @@ under explicit, condition-labeled assumptions. Findings:
 2. **Required statement (entity unresolved):** *The published dataset does
    not provide enough information to establish that adjacent rows belong to
    the same physical transformer.*
-3. **Repeated records** (931 Overview groups; 2.3–4.8 % of timestamps) are
+3. **Repeated records** (931 Overview groups; 2.2–4.8 % of timestamps) are
    synchronized across files, raw-line adjacent, near-identical in value,
    concentrated in the deployment month, and **never contain the 47
    high-OTI rows** — most consistent with ingestion/export re-transmission
@@ -95,7 +95,7 @@ verbatim quotes (section-referenced) recorded in
 Terminology: **repeated-timestamp records** — never "duplicates" (origin
 unknown). No conflicting OTI or binary flag is ever averaged.
 
-- Multiplicity: Overview {1: 18,454, 2: 923, 3: 7, 4: 1}; other files
+- Multiplicity: Overview {1: 18,445, 2: 923, 3: 7, 4: 1}; other files
   {1: ~18.4k, 2: ~0.4k}.
 - Cross-file sharing: 420/437 (CV↔OV) … 290/406 (TP↔OV) of repeated
   timestamps repeat across files → synchronized ingestion layer.

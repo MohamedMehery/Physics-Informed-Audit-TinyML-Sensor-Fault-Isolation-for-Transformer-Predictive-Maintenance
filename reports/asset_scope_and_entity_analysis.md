@@ -32,12 +32,12 @@ metadata. The rest of this report evaluates the *statistical* evidence.
 | File | rows | unique ts | repeated groups | multiplicity |
 |------|------|-----------|-----------------|--------------|
 | CurrentVoltage | 19,352 | 18,915 | 437 | {1: 18,478, 2: 437} |
-| Overview | 20,316 | 19,385 | 931 | {1: 18,454, 2: 923, 3: 7, 4: 1} |
+| Overview | 20,316 | 19,376 | 931 | {1: 18,445, 2: 923, 3: 7, 4: 1} |
 | Power | 19,309 | 18,871 | 438 | {1: 18,433, 2: 438} |
 | PowerFactor | 19,308 | 18,877 | 431 | {1: 18,446, 2: 431} |
-| TotalPower | 19,248 | 18,842 | 406 | {1: 18,442, 2: 406} |
+| TotalPower | 19,248 | 18,842 | 406 | {1: 18,436, 2: 406} |
 
-- Repeats touch only **2.3–4.8 %** of timestamps per file — a constant second
+- Repeats touch only **2.2–4.8 %** of timestamps per file — a constant second
   device stream would repeat at ~100 %.
 - **Cross-file sharing:** of Overview's 931 repeated groups, 420 share the
   timestamp with CurrentVoltage repeats (406/438 with Power, 376/431 with

@@ -27,7 +27,7 @@ physics. This repository deliberately separates what is *known* from what is
 - **Entity unresolved (required statement):** *The published dataset does not
   provide enough information to establish that adjacent rows belong to the
   same physical transformer.*
-- **Repeats:** 406–931 repeated-timestamp groups per file (2.3–4.8 % of
+- **Repeats:** 406–931 repeated-timestamp groups per file (2.2–4.8 % of
   timestamps), synchronized across files, raw-line adjacent, near-identical
   in value, never containing the 47 high-OTI records — most consistent with
   ingestion/export re-transmission for the repeats; no support for

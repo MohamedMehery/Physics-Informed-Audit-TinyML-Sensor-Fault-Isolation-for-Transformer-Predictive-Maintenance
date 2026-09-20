@@ -57,7 +57,7 @@ byte-preserved, hash-verified before and after every run.
   voltage regimes (VL1 220–260 V, VL12 381–443 V), no stable occurrence
   streams (repeat share ≤ 4.8 %), branch parity, per-row Σ(VLx·ILx) ≈ KVA.
   H3/H4 find no support in any test.
-- **Repeated records:** Overview 931 groups (2.3–4.8 % of timestamps across
+- **Repeated records:** Overview 931 groups (2.2–4.8 % of timestamps across
   files); synchronized across files (e.g., 420/437 CV↔OV); all raw-line
   adjacent; conflicts tiny (OTI median 1 unit; VL1 median 0.4 V); 448/931
   in the deployment month (2019-06) decaying afterward; **0 of 47 high-OTI
