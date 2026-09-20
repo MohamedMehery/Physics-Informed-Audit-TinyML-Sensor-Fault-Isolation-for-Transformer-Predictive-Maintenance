@@ -3,8 +3,8 @@
 **1. Status: COMPLETE** (one scope deviation, documented: the README to
 archive never existed — see item 10).
 
-**2. Git:** repository initialized during Phase 1; initial commit hash
-recorded in the repository log (first commit: "Phase 1 — evidence-first
+**2. Git:** repository initialized during Phase 1; Phase-1 content commit
+`9d73ab2f0bd5cc23ae5ba8258dab5b8ce6b85ce9` ("Phase 1 — evidence-first
 bootstrap, provenance, asset identity, data audit").
 
 **3. Official dataset acquisition: SUCCESS.** Downloaded anonymously from
