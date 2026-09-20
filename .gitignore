@@ -1,0 +1,22 @@
+# Raw and downloaded dataset files are NOT committed.
+# License displayed on Kaggle is "Data files © Original Authors"; redistribution
+# conditions are unverified, so only hashes/manifests/scripts/docs are tracked.
+# See data/README.md.
+data/downloads/
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+
+# Tool caches (never commit)
+.cache/
+
+# OS / editors
+.DS_Store
+Thumbs.db

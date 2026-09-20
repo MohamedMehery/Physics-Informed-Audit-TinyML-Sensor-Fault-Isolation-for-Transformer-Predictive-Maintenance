@@ -1,0 +1,6 @@
+filename,duplicate_timestamp_groups,identical_groups,conflicting_groups,max_records_per_timestamp,conflicting_columns_seen
+CurrentVoltage.csv,437,32,405,2,IL1;IL2;IL3;INUT;VL1;VL12;VL2;VL23;VL3;VL31
+Overview.csv,931,568,363,4,ATI;OLI;OTI;WTI
+Power.csv,438,429,9,2,RVAL1;RVAL2;RVAL3;VAL1;VAL2;VAL3;WL1;WL2;WL3
+PowerFactor.csv,431,1,430,2,Avg_PF;FRQ;PFL1;PFL2;Sum_PF;THDIL1;THDIL2;THDIL3;THDVL1;THDVL2;THDVL3
+TotalPower.csv,406,393,13,2,KVA;KVAR;KVARH;KW;KWH;KWH_I

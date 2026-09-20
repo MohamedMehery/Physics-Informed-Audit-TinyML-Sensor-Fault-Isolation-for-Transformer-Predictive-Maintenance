@@ -1,0 +1,8 @@
+{
+  "n_compared": 17243,
+  "per_phase_sum_median_abs_err_pct": 1.363029867597245,
+  "per_phase_sum_p95_abs_err_pct": 5.165927188979129,
+  "sqrt3_median_abs_err_pct": 1.4095399139501807,
+  "sqrt3_p95_abs_err_pct": 5.251295700891029,
+  "notes": "per_phase_sum = VL1*IL1 + VL2*IL2 + VL3*IL3 (valid for per-phase magnitudes, ignores phase-angle differences); sqrt3_approx = sqrt(3) * mean(VL12,VL23,VL31) * mean(IL1,IL2,IL3) (assumes balanced sinusoidal three-phase; biased under unbalance); both compared to reported KVA column."
+}

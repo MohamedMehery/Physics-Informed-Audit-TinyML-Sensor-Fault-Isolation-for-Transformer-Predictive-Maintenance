@@ -1,0 +1,6 @@
+filename,n_intervals,n_nonpositive_intervals,n_zero_intervals,min_minutes,median_minutes,p95_minutes,p99_minutes,max_minutes,n_intervals_gt_30min,n_intervals_gt_60min,n_intervals_gt_1440min,mean_minutes
+CurrentVoltage.csv,19351,437,437,1.0,15.0,15.0,23.0,48399.0,108,60,18,22.343449296817173
+Overview.csv,20315,940,940,1.0,15.0,15.0,22.0,48398.0,101,58,19,21.81181935483871
+Power.csv,19308,438,438,1.0,15.0,15.0,23.0,48399.0,112,60,18,22.395548489666137
+PowerFactor.csv,19307,431,431,1.0,15.0,15.0,23.0,48399.0,110,59,18,22.38986013986014
+TotalPower.csv,19247,406,406,1.0,15.0,15.0,23.0,48399.0,115,59,17,22.284326734249774

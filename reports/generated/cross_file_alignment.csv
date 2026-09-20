@@ -1,0 +1,11 @@
+file_a,file_b,n_timestamps_a,n_timestamps_b,exact_matches,matches_within_15min,nearest_delta_min_minutes,nearest_delta_median_minutes,nearest_delta_p95_minutes,nearest_delta_max_minutes
+CurrentVoltage.csv,Overview.csv,18915,19376,18729,18913,0.0,0.0,0.0,17.0
+CurrentVoltage.csv,Power.csv,18915,18871,18711,18909,0.0,0.0,0.0,20.0
+CurrentVoltage.csv,PowerFactor.csv,18915,18877,18587,18911,0.0,0.0,0.0,63.0
+CurrentVoltage.csv,TotalPower.csv,18915,18842,18432,18909,0.0,0.0,0.0,2745.0
+Overview.csv,Power.csv,19376,18871,18578,19362,0.0,0.0,0.0,1970.0
+Overview.csv,PowerFactor.csv,19376,18877,18481,19365,0.0,0.0,0.0,1970.0
+Overview.csv,TotalPower.csv,19376,18842,18370,19361,0.0,0.0,1.0,2745.0
+Power.csv,PowerFactor.csv,18871,18877,18716,18870,0.0,0.0,0.0,63.0
+Power.csv,TotalPower.csv,18871,18842,18533,18867,0.0,0.0,0.0,2745.0
+PowerFactor.csv,TotalPower.csv,18877,18842,18654,18872,0.0,0.0,0.0,2772.0

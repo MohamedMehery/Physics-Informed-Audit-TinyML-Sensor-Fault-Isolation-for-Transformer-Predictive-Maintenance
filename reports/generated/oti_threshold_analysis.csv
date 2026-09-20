@@ -1,0 +1,4 @@
+value_column,flag,n_flag_1,value_range_flag_1,n_flag_0,value_range_flag_0,classes_overlap,best_threshold,best_threshold_direction,threshold_rule_accuracy
+OTI,OTI_A,101,29.0..250.0,20215,0.0..54.0,True,236.0,>=,0.9973419964559953
+OTI,OTI_T,47,236.0..250.0,20269,0.0..54.0,False,236.0,>=,1.0
+OLI,MOG_A,2153,38.0..41.0,18163,36.0..100.0,True,36.0,<=,0.8939751919669227

@@ -1,0 +1,69 @@
+{
+  "audit_run_utc": "2026-09-20T20:22:09Z",
+  "environment": {
+    "python": "3.13.14",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.41"
+  },
+  "provenance_gate": "PASS (pre-run; post-run verified separately)",
+  "files": {
+    "CurrentVoltage.csv": {
+      "rows": 19352,
+      "unique_timestamps": 18915
+    },
+    "Overview.csv": {
+      "rows": 20316,
+      "unique_timestamps": 19376
+    },
+    "Power.csv": {
+      "rows": 19309,
+      "unique_timestamps": 18871
+    },
+    "PowerFactor.csv": {
+      "rows": 19308,
+      "unique_timestamps": 18877
+    },
+    "TotalPower.csv": {
+      "rows": 19248,
+      "unique_timestamps": 18842
+    }
+  },
+  "overview": {
+    "oti_max_normal_band": 54.0,
+    "oti_min_high_band": 236.0,
+    "n_rows_oti_ge_100": 47,
+    "oti_t_active_rows": 47,
+    "oti_a_active_rows": 100,
+    "oti_a_active_with_oti_below_100": 53,
+    "wti_unique_values": [
+      0.0,
+      1.0
+    ],
+    "all_files_common_timestamps": 18324
+  },
+  "oti_rate_stats": {
+    "value_column": "OTI",
+    "n_rates_computed": 19375,
+    "n_intervals_excluded_nonpositive_or_missing": 1,
+    "rate_min_per_min": -40.8,
+    "rate_median_per_min": 0.0,
+    "rate_p95_abs_per_min": 0.2,
+    "rate_p99_abs_per_min": 0.4,
+    "rate_max_per_min": 91.0,
+    "rate_min_abs_per_min": 0.0,
+    "normal_mode_n_rates": 19318,
+    "normal_mode_p99_abs_per_min": 0.3333333333333333,
+    "normal_mode_max_abs_per_min": 33.0,
+    "excursion_mode_n_rates": 57,
+    "excursion_mode_max_abs_per_min": 91.0
+  },
+  "power_formula_crosscheck": {
+    "n_compared": 17243,
+    "per_phase_sum_median_abs_err_pct": 1.363029867597245,
+    "per_phase_sum_p95_abs_err_pct": 5.165927188979129,
+    "sqrt3_median_abs_err_pct": 1.4095399139501807,
+    "sqrt3_p95_abs_err_pct": 5.251295700891029,
+    "notes": "per_phase_sum = VL1*IL1 + VL2*IL2 + VL3*IL3 (valid for per-phase magnitudes, ignores phase-angle differences); sqrt3_approx = sqrt(3) * mean(VL12,VL23,VL31) * mean(IL1,IL2,IL3) (assumes balanced sinusoidal three-phase; biased under unbalance); both compared to reported KVA column."
+  }
+}

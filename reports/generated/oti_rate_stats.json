@@ -1,0 +1,16 @@
+{
+  "value_column": "OTI",
+  "n_rates_computed": 19375,
+  "n_intervals_excluded_nonpositive_or_missing": 1,
+  "rate_min_per_min": -40.8,
+  "rate_median_per_min": 0.0,
+  "rate_p95_abs_per_min": 0.2,
+  "rate_p99_abs_per_min": 0.4,
+  "rate_max_per_min": 91.0,
+  "rate_min_abs_per_min": 0.0,
+  "normal_mode_n_rates": 19318,
+  "normal_mode_p99_abs_per_min": 0.3333333333333333,
+  "normal_mode_max_abs_per_min": 33.0,
+  "excursion_mode_n_rates": 57,
+  "excursion_mode_max_abs_per_min": 91.0
+}

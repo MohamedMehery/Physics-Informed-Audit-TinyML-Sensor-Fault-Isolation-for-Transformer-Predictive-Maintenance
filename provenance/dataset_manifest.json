@@ -1,0 +1,55 @@
+{
+  "dataset": {
+    "slug": "sreshta140/ai-transformer-monitoring",
+    "title": "Distributed Transformer Monitoring",
+    "owner": "Sreshta Putchala",
+    "url": "https://www.kaggle.com/datasets/sreshta140/ai-transformer-monitoring",
+    "version": 1,
+    "version_notes": "Initial release",
+    "version_created_utc": "2020-05-25T10:08:46.673Z",
+    "license_displayed": "Data files © Original Authors",
+    "access_date_utc": "2026-09-20T20:03:36Z"
+  },
+  "archive": {
+    "filename": "ai-transformer-monitoring_v1.zip",
+    "byte_size": 1481162,
+    "sha256": "b9257e990d480b3486b176bc19304a18b4aa82fd07dc559ec16aaa3ed3fe9c68"
+  },
+  "acquisition_method": "Anonymous HTTPS download from official Kaggle API endpoints (api/v1/datasets/download/sreshta140/ai-transformer-monitoring); no mirror used.",
+  "extracted_files": [
+    {
+      "filename": "CurrentVoltage.csv",
+      "byte_size": 1428576,
+      "sha256": "885fad08ecc4fd631a8ab483573796f0ca0dbcddbb6d252d7c2b23cc9b18eae7"
+    },
+    {
+      "filename": "Overview.csv",
+      "byte_size": 1003649,
+      "sha256": "99c371db6d8fb73669ab5036e1cdaae93a8f590dfb0bc1301807cfc415888be7"
+    },
+    {
+      "filename": "Power.csv",
+      "byte_size": 1183477,
+      "sha256": "f1aa074386c9d7e72b06105f8732d168e57227c240f70f7985563aced53b0128"
+    },
+    {
+      "filename": "PowerFactor.csv",
+      "byte_size": 1739626,
+      "sha256": "cc36cec106b1be03a13d62da5d6b5d0fe24da9a140817f0ceac1ea715f0e39a7"
+    },
+    {
+      "filename": "TotalPower.csv",
+      "byte_size": 1560439,
+      "sha256": "0e1995281f5857435be846ff0716151eca044f5c4362b16064c16e947046b623"
+    }
+  ],
+  "notes": {
+    "description_excerpt": "Transformers plays a very important role in the power system. Though they are some of the most reliable component of the electrical grid they are also prone to failure due to many factors both internal or external. There could be many initiators which cause a transformer failure, but those which can potentially lead to catastrophic failure are the following : \nMechanical Failure\nDielectric Failure\n\n### Content\nThis data is collected via IoT devices from June 25th, 2019 to April 14th, 2020 which ",
+    "dataset_id_kaggle": 673798
+  },
+  "kaggle_metadata_snapshot": {
+    "filename": "kaggle_metadata_v1.json",
+    "byte_size": 5149,
+    "sha256": "9f1fbd5f18c9a44ece2aa24bc4008bbe52feb66df8ab75de7792be38b10e5869"
+  }
+}
