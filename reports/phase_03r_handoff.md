@@ -12,7 +12,7 @@ preserved (verified before/after every run).
 
 ## 2. Commit hash
 
-Phase-3R content commit: `__3R_HASH__` (this handoff's hash line is a
+Phase-3R content commit: `79e06e6` (this handoff's hash line is a
 follow-up commit). Prior Phase-3 commits `cddb031`, `ffa60e2`.
 
 ## 3. Errors found in the old Phase-3 handoff
