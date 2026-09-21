@@ -281,6 +281,7 @@ Highlights (numbers: `reports/generated/`):
 
 **Unknown:** nameplate rating (the circulating "1500 kVA, 11/0.4 kV" figure
 comes from a secondary paper describing *its own* system and is an
+ an
 unverified lead for this asset), oil mass/volume, cooling class, oil type,
 thermal time constant, sensor types, transmitter range, protection logic,
 manufacturer/model, site/country (50 Hz system only), time zone, OTI units
@@ -308,3 +309,7 @@ history) on 2026-09-20; the "unverified AI-generated README" that Phase 1
 was asked to archive did not exist, so nothing was inherited and nothing is
 fabricated. See `docs/archive/README_initial_unverified.md` and
 `reports/phase_01_report.md` §1.
+License & Citation
+
+- **Code License:** [Apache License 2.0](license.txt)
+- **Documentation & Reports:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
