@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software or documentation, please cite it as below."
+authors:
+  - family-names: "Mehery"
+    given-names: "Mohamed"
+    affiliation: "Independent Researcher"
+title: "transformer-telemetry-integrity-audit"
+version: 0.1.0
+date-released: 2026-09-21
+license: Apache-2.0
+repository-code: "https://github.com/MohamedMehery/transformer-telemetry-integrity-audit"
