@@ -2,9 +2,13 @@
 
 **Status: Phase 3R — leakage-controlled evaluation and claim
 correction** (complete; see `reports/phase_03r_report.md` and
-`reports/phase_03r_handoff.md`; Phases 1–3 also complete:
-`reports/phase_01_report.md`, `reports/phase_02_report.md`,
-`reports/phase_03_report.md`)
+`reports/phase_03r_handoff.md`; Phases 1–2:
+`reports/phase_01_report.md`, `reports/phase_02_report.md`; the Phase-3
+report is superseded by Phase 3R and archived under
+`docs/archive/superseded_phase3/`)
+
+This repository is a **technical report / research software artifact**
+(release v0.1.0). It is **not peer reviewed**.
 
 An evidence-first investigation of the public Kaggle dataset
 **"Distributed Transformer Monitoring"**, focused on data quality,
@@ -50,9 +54,12 @@ A family of **deterministic, causal, streaming plausibility filters**
 pure-stdlib reference implementation + C skeleton with host parity) was
 designed, evaluated, and then **repaired in Phase 3R** after an
 acceptance review found that the original threshold selection used the
-full dataset. Full details: `reports/phase_03_report.md`,
-`reports/phase_03r_report.md`, `reports/phase_03_acceptance_review.md`;
-paper plan: `paper/outline.md`.
+full dataset. Full details: `reports/phase_03r_report.md`
+(authoritative), `reports/phase_03_acceptance_review.md`, and the
+superseded Phase-3 report (archived verbatim at
+`docs/archive/superseded_phase3/phase_03_report.md`); consolidated
+technical report: `paper/technical_report_v0_1.md`; paper plan:
+`paper/outline.md`.
 
 **Phase-3R headline results (frozen-threshold chronological replay;
 `reports/generated/phase_03r_*.csv/json`):**
@@ -177,10 +184,17 @@ python scripts/download_dataset.py       # official Kaggle download; verifies ha
                                          # extracts raw/ (gitignored); writes manifest
 python scripts/run_data_audit.py         # Phase-1 audit -> reports/generated/*.csv|json
 python scripts/run_phase2_analysis.py    # Phase-2 analysis -> generated CSVs + figures
-python scripts/run_filter_evaluation.py  # Phase-3 filter sweep (1,160 configs, provenance-gated)
+python scripts/run_filter_evaluation.py  # Phase-3 filter sweep (1,160 configs, provenance-gated;
+                                         # EXPLORATORY / oracle — not held-out validation)
+python scripts/run_leakage_replay.py     # Phase-3R frozen-threshold chronological replay
+                                         # (primary filter result -> phase_03r_* artifacts)
+python scripts/check_c_python_parity.py  # C/Python parity (requires cc or gcc, C99);
+                                         # boundary self-tests + full 19,376-sample replay
+                                         # (--boundary-only runs without raw data)
 python scripts/independent_raw_verification.py  # stdlib-only recomputation; 56 checks;
                                                  # exits non-zero on any disagreement
-python -m pytest                         # 69 synthetic-fixture unit tests
+python -m pytest                         # 137 tests: fixtures + replay, parity, and
+                                         # overclaim guards; expected result: 137 passed
 ```
 
 `run_data_audit.py` and `run_phase2_analysis.py` verify raw-file SHA-256
@@ -189,12 +203,18 @@ mismatch (raw files are never modified). All rates use actual timestamp
 differences, never an assumed 15-minute cadence. Tested environment:
 Python 3.13.14, pandas 2.2.3, numpy 2.3.5, matplotlib 3.10.9, Linux x86_64
 (also recorded in `reports/generated/phase_0{1,2}_summary.json`).
+A step-by-step quickstart (environment setup, download, every phase,
+expected results and artifacts) is in `docs/reproducibility_quickstart.md`.
 
 ## Repository structure
 
 ```
 README.md                     this file
 pyproject.toml                package config (transformer-audit)
+LICENSE                       Apache License 2.0 (code)
+CONTENT_LICENSE.md            CC BY 4.0 (documentation, reports, figures)
+NOTICE                        attribution + dataset-rights notice
+CITATION.cff                  citation metadata (GitHub "Cite this repository")
 data/                         gitignored raw+download data; policy in data/README.md
 docs/
   research_protocol.md        evidence rules, prohibitions, event definitions
@@ -211,8 +231,13 @@ scripts/
   run_data_audit.py           Phase-1 audit
   run_phase2_analysis.py      Phase-2 analysis (artifacts + figures)
   run_filter_evaluation.py    Phase-3 filter sweep + baselines + cost table
+                              (EXPLORATORY / oracle)
+  run_leakage_replay.py       Phase-3R frozen-threshold replay (primary result)
+  check_c_python_parity.py    C/Python parity driver (requires cc/gcc)
   independent_raw_verification.py  stdlib-only cross-check (56 checks)
-tests/                        69 unit tests (synthetic fixtures only)
+firmware_skeleton/            C99 reference filter (mif_filter.h/.c; 72 B state)
+paper/                        technical report v0.1.0, references, paper plan
+tests/                        137 tests (fixtures + replay/parity/overclaim guards)
 docs/outreach_requests.md     provider/uploader question drafts — NOT SENT
 reports/
   asset_identity_evidence.md  asset-identity investigation (Phase 1)
@@ -225,10 +250,14 @@ reports/
   asset_parameter_bounds.md           parameters + official manufacturer envelope
   conditional_physics_analysis.md     assumption-labeled energy/tau bounds
   phase_02_report.md         detailed Phase-2 report (13 sections)
-  phase_03_report.md         Phase-3 filter report (10 sections)
-  phase_03_handoff.md        compact Phase-3 handoff
   phase_02_handoff.md        compact Phase-2 handoff
-  figures/                   physics bounds figures (PNG)
+  phase_03r_report.md        Phase-3R report (authoritative filter evaluation)
+  phase_03r_handoff.md       compact Phase-3R handoff
+  phase_03_acceptance_review.md  review that triggered Phase 3R
+  (superseded Phase-3 originals archived verbatim:
+   docs/archive/superseded_phase3/)
+  figures/                   figures (PNG; filter figures carry in-image
+                             EXPLORATORY / ORACLE SWEEP labels)
   generated/                 machine-readable audit outputs (CSV/JSON)
 ```
 
@@ -283,8 +312,9 @@ Highlights (numbers: `reports/generated/`):
 comes from a secondary paper describing *its own* system and is an
 unverified lead for this asset), oil mass/volume, cooling class, oil type,
 thermal time constant, sensor types, transmitter range, protection logic,
-manufacturer/model, site/country (50 Hz system only), time zone, OTI units
-(assumed °C for rate statements — flagged), OLI units, WTI's physical
+manufacturer/model, site/country (50 Hz system only), time zone, OTI
+engineering unit (unconfirmed — rates are stated in OTI-units per
+minute; no °C conversion is used anywhere), OLI units, WTI's physical
 semantics.
 
 **Limitations:** sampling irregular and gappy; duplicate/conflicting
@@ -311,5 +341,5 @@ fabricated. See `docs/archive/README_initial_unverified.md` and
 
 ## License & Citation
 
-- **Code License:** [Apache License 2.0](license.txt)
+- **Code License:** [Apache License 2.0](LICENSE)
 - **Documentation & Reports:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)

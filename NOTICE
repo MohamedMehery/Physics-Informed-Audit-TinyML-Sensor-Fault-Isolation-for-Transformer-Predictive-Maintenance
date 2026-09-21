@@ -1,0 +1,24 @@
+transformer-telemetry-integrity-audit
+Copyright 2026 Mohamed Mehery (Independent Researcher)
+
+This repository is a technical report / research software artifact
+(not peer reviewed) auditing the public Kaggle dataset
+"Distributed Transformer Monitoring" (sreshta140/ai-transformer-monitoring,
+version 1, 2020), uploaded by Sreshta Putchala. Dataset files are
+"Data files (c) Original Authors" per the Kaggle license display.
+
+License split:
+
+- Code (src/, scripts/, firmware_skeleton/, tests/) is licensed under
+  the Apache License 2.0 (see LICENSE).
+- Documentation, reports, figures, and technical-report text (docs/,
+  reports/, paper/, README.md) are licensed under the Creative Commons
+  Attribution 4.0 International (CC BY 4.0) license (see
+  CONTENT_LICENSE.md).
+
+The raw Kaggle dataset is NOT owned by the repository author and is NOT
+redistributed in this repository (raw and downloaded files are
+gitignored; only hashes, manifests, code, and documentation are
+tracked). Dataset rights remain with the original authors / the Kaggle
+dataset owner. Neither of the repository's licenses applies to the
+Kaggle dataset, and neither grants any right to redistribute it.

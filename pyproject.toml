@@ -5,12 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "transformer-audit"
 version = "0.1.0"
-description = "Evidence-first audit pipeline for the Kaggle 'Distributed Transformer Monitoring' dataset (Phase 1)"
+description = "Evidence-first audit and deterministic plausibility filters for the Kaggle 'Distributed Transformer Monitoring' dataset"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "pandas>=2.0",
     "numpy>=1.24",
+    "matplotlib>=3.7",
 ]
 
 [project.optional-dependencies]

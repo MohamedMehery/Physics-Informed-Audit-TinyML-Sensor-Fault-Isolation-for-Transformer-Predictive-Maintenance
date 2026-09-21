@@ -312,8 +312,10 @@ def main() -> int:
     ax.set_xscale("symlog", linthresh=1e-4)
     ax.set_xlabel("false-alarm episodes per day of normal operation")
     ax.set_ylabel("event detection rate (of 10 rising band-crossings)")
-    ax.set_title("Filter ROC by type (P2_first policy, gap=reset)\n"
-                 "All detections are CONCURRENT (lead = 0); x-axis log-scale")
+    ax.set_title("EXPLORATORY / ORACLE SWEEP — Filter ROC by type "
+                 "(P2_first policy, gap=reset)\n"
+                 "Full-data thresholds, NOT held-out validation; all "
+                 "detections CONCURRENT (lead = 0); x-axis log-scale")
     ax.set_ylim(-0.03, 1.05)
     ax.legend(fontsize=8, loc="lower right")
     ax.grid(alpha=0.3)
@@ -339,7 +341,8 @@ def main() -> int:
         ax2.set_ylabel("false-alarm episodes/day", color="tab:red")
         ax.set_title(ftype)
         ax.grid(alpha=0.3)
-    fig.suptitle("Threshold sensitivity (P2_first, gap=reset)", y=1.02)
+    fig.suptitle("EXPLORATORY / ORACLE SWEEP — Threshold sensitivity (P2_first, gap=reset)\n"
+                 "Full-data thresholds, NOT held-out validation", y=1.02)
     fig.tight_layout()
     fig.savefig(FIG / "filter_threshold_sensitivity.png", dpi=140,
                 bbox_inches="tight")
@@ -361,7 +364,8 @@ def main() -> int:
     ax.set_xlabel("lead time (min): crossing_ts - first_flag_ts "
                   "(0 = concurrent detection)")
     ax.set_ylabel("events")
-    ax.set_title(f"Lead-time distribution, F3 combined rate>2 & OTI>50 (P2, reset)\n"
+    ax.set_title(f"EXPLORATORY / ORACLE SWEEP — Lead-time distribution, "
+                 f"F3 combined rate>2 & OTI>50 (P2, reset)\n"
                  f"detected {int(bal['events_detected_of_10'])}/10, "
                  f"mean lead {bal['mean_lead_time_min']} min — "
                  "no genuine early warning in this dataset")

@@ -31,8 +31,9 @@
   not clearly grant redistribution rights.
 - Therefore the raw and downloaded data are **not committed** to this
   repository. Only hashes, manifests, code, and documentation are tracked.
-- The code in this repository is licensed separately (license decision
-  pending repository owner — no license is created on the owner's behalf).
+- The code in this repository is licensed under Apache-2.0 (see
+  `LICENSE`); documentation and reports under CC BY 4.0 (see
+  `CONTENT_LICENSE.md`). Neither license applies to the Kaggle dataset.
 - Nothing in this repository's code license permits redistribution of the
   Kaggle dataset files.
 

@@ -1,5 +1,5 @@
 {
-  "title": "transformer-telemetry-integrity-audit",
+  "title": "Transformer Telemetry Integrity Audit",
   "version": "v0.1.0",
   "creators": [
     {
@@ -7,7 +7,7 @@
       "affiliation": "Independent Researcher"
     }
   ],
-  "description": "Transformer Telemetry Integrity Audit tools and documentation.",
+  "description": "Transformer Telemetry Integrity Audit tools and documentation. Raw Kaggle dataset files are NOT included (gitignored; hashes/manifests only).",
   "access_right": "open",
   "license": "Apache-2.0",
   "keywords": [

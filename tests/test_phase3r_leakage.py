@@ -312,12 +312,34 @@ FORBIDDEN = [
     "artificial intelligence",
     "intelligent sensor",
     "fault-detection validation",
+    "proven sensor fault",
+    "adc rail confirmed",
+    "confirmed adc rail",
+    "proven pt100",
+    "confirmed pt100",
+    "proven single transformer",
+    "validated physical fault",
+    "validated transformer fault detector",
+    "tinyml solution",
+    "all prior work invalid",
+    "thermal trip ground truth",
+    "oti confirmed celsius",
+    "confirmed hardware root cause",
 ]
 
 REQUIRED = {
     "README.md": ["unresolved", "unconfirmed", "operationally defined",
                   "unknown", "exploratory", "internal validation only"],
     "paper/abstract_draft_conservative.md": ["deterministic plausibility filter"],
+    "paper/technical_report_v0_1.md": [
+        "deterministic plausibility filter",
+        "not peer reviewed",
+        "entity identity remains unresolved",
+        "operationally defined",
+        "post-hoc leakage-controlled replay",
+    ],
+    "docs/reproducibility_quickstart.md": ["137"],
+    "docs/release_notes_v0_1.md": ["not peer reviewed", "exploratory"],
 }
 
 
@@ -330,9 +352,16 @@ NEGATION_MARKERS = ("no ", "not ", "never", "rejected", "forbidden",
 
 
 def test_no_forbidden_overclaims():
-    for rel in ("README.md", "paper/outline.md",
-                "paper/abstract_draft_conservative.md",
-                "paper/title_candidates.md", "paper/limitations.md"):
+    scan_files = ("README.md", "paper/outline.md",
+                  "paper/abstract_draft_conservative.md",
+                  "paper/title_candidates.md", "paper/limitations.md",
+                  "paper/technical_report_v0_1.md",
+                  "docs/reproducibility_quickstart.md",
+                  "docs/release_notes_v0_1.md",
+                  "docs/release_claims_v0_1.md")  # scanned if present
+    for rel in scan_files:
+        if not (REPO_ROOT / rel).exists():
+            continue
         text = _read(rel)
         lines = text.splitlines()
         for term in FORBIDDEN:
@@ -351,7 +380,8 @@ def test_energies_claim_wording_is_restricted():
     """The Energies 24-hour statement may only appear as 'not
     reproduced by this project', never as unsupported/invalid."""
     for rel in ("README.md", "paper/outline.md",
-                "paper/abstract_draft_conservative.md", "paper/limitations.md"):
+                "paper/abstract_draft_conservative.md", "paper/limitations.md",
+                "paper/technical_report_v0_1.md"):
         text = _read(rel)
         if "24 h" in text or "24-hour" in text or "24 hours" in text:
             for bad in ("unsupported by this export", "is unsupported",
@@ -373,7 +403,8 @@ def test_required_wording_present():
 
 
 def test_full_data_sweep_labeled_exploratory():
-    for rel in ("README.md", "reports/phase_03_report.md"):
+    for rel in ("README.md",
+               "docs/archive/superseded_phase3/phase_03_report.md"):
         text = _read(rel)
         assert "exploratory" in text and "oracle" in text, rel
     summary = json.loads((REPO_ROOT / "reports" / "generated" /

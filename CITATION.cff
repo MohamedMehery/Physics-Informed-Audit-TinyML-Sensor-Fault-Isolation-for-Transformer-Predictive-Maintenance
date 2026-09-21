@@ -4,7 +4,7 @@ authors:
   - family-names: "Mehery"
     given-names: "Mohamed"
     affiliation: "Independent Researcher"
-title: "transformer-telemetry-integrity-audit"
+title: "Transformer Telemetry Integrity Audit"
 version: 0.1.0
 date-released: 2026-09-21
 license: Apache-2.0
