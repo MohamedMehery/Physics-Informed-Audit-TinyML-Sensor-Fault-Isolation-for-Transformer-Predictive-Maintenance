@@ -1,6 +1,6 @@
 # Phase 4B Handoff — Publication Repair, Technical Report, DOI-Ready Package
 
-**1. Status.** COMPLETE. Delivered in commit `__4B_HASH__` plus this
+**1. Status.** COMPLETE. Delivered in commit `019013776f8a27f9e2ff8102d3c41d4266c118d7` plus this
 hash-record commit (Phase-3R precedent). No new experiments, no
 threshold retuning, no outreach, no tagging (owner action). Duplicated
 earlier work was merged, not redone: inventory deliverables already
@@ -9,7 +9,7 @@ committed (`411614f`), Apache-2.0 full text (`6310981`), CITATION.cff
 (`71a63d2`/`228e0f5`). This phase edited/extended those artifacts only
 where the Phase-4B prompt required.
 
-**2. Commit hash.** `__4B_HASH__` — "Prepare v0.1.0 release
+**2. Commit hash.** `019013776f8a27f9e2ff8102d3c41d4266c118d7` — "Prepare v0.1.0 release
 documentation and citation metadata". Pushed to origin/main (session
 device-flow credentials were available). No tag created.
 
