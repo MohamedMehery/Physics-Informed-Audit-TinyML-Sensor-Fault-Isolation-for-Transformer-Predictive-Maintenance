@@ -1,0 +1,18 @@
+{
+  "title": "transformer-telemetry-integrity-audit",
+  "version": "v0.1.0",
+  "creators": [
+    {
+      "name": "Mehery, Mohamed",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "description": "Transformer Telemetry Integrity Audit tools and documentation.",
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "keywords": [
+    "transformer",
+    "telemetry",
+    "integrity-audit"
+  ]
+}
