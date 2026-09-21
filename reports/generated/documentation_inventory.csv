@@ -1,0 +1,122 @@
+path,file_type,purpose,phase_created,current_or_superseded,source_of_truth,complete,referenced_by_readme,needs_update,notes
+README.md,markdown,"Project landing page: status, findings, unknowns, reproducibility",1-3R,current,"yes (public claims, shared with registers)",no,yes,yes,"Repro block stale: says 69 tests (actual 137), missing run_leakage_replay.py and check_c_python_parity.py commands and C-compiler requirement; 'assumed degC' parenthetical stale vs C33; no license/citation section"
+.gitignore,config,"Excludes raw data, caches, build dirs",infra,current,yes,yes,no,no,
+pyproject.toml,config,"Package metadata, deps, pytest config",1,current,yes,yes,yes,yes,Description says '(Phase 1)'; matplotlib used by scripts but not declared; version 0.1.0; no lock file
+data/README.md,markdown,Dataset storage policy; primary-source record; license/redistribution notice,1,current,yes (redistribution notice),yes,yes,no,"States raw files gitignored, hash-pinned; 'Data files (c) Original Authors'"
+docs/research_protocol.md,markdown,Evidence classification protocol (CONFIRMED-DATA/SOURCE/INFERENCE etc.),1,current,yes (evidence classes),yes,yes,no,
+docs/claim_register.md,markdown,Allowed claims C01-C48 with evidence classes and artifacts,1-3R,current,yes (allowed claims),yes (living doc),yes,no,C38/C39 corrected in place in 3R
+docs/assumption_register.md,markdown,Assumptions A01-A37 with status labels,1-3R,current,yes (assumptions),yes (living doc),yes,no,
+docs/outreach_requests.md,markdown,Outreach drafts (4 targets + 1 optional); NOT SENT; owner checklist,2,current,yes (outreach drafts),yes,yes,yes (after publication),No DOI/repo link placeholders yet; sending requires owner authorization + publication first
+docs/paper_outline.md,markdown,Phase-3 paper outline - superseded by paper/outline.md,3,superseded,no,yes,no,no,Carries SUPERSEDED banner; keep as history
+docs/documentation_map.md,markdown,Source-of-truth map (this inventory),3R-docs,current,yes (doc map),yes,no,no,New deliverable of this task
+docs/archive/README_initial_unverified.md,markdown,Archive slot + warning for unverified AI-generated README,1,archival,no,yes,yes,no,Do not cite
+docs/archive/remote_readme_4ab4b02.md,markdown,Owner's original GitHub README archived verbatim (4ab4b02),1,archival,no,yes,no,no,Contains MIT badge + claims later corrected; historical only
+docs/archive/remote_readme_corrections.md,markdown,Correction notes for the archived remote README,1,supporting,no,yes,no,no,
+paper/outline.md,markdown,"Paper outline (3R revision): story, section plan, evidence map, claims NOT made",3R,current,yes (paper plan),yes as outline,yes,no,Outline only - NOT a draft paper
+paper/abstract_draft_conservative.md,markdown,Conservative abstract drafts (2 lengths) + wording constraints,3R,current,yes (abstract draft),yes,no,no,Numbers present; no explicit artifact links; no citations (normal for abstract)
+paper/title_candidates.md,markdown,Ranked title candidates + rejected candidates with reasons,3R,current,yes,yes,no,no,Flags repo-name terminology conflict
+paper/limitations.md,markdown,13 numbered limitations incl. six required standing statements,3R,current,"yes (limitations, with registers)",yes,no,no,
+paper/figures_tables_inventory.md,markdown,Planned figures/tables with status labels,3R,current,partial,no,no,yes,Lists figures F2/F3 as [READY] but those PNGs do not exist yet (only source CSVs); statuses must be re-checked when figures are generated
+provenance/dataset_manifest.json,json,"Dataset manifest: SHA-256 hashes, sizes, acquisition method, Kaggle metadata snapshot",1,current,yes (manifest/hashes),yes,yes,no,Gates verify against this before/after every run
+provenance/source_register.csv,csv,"Source register S1-S11+: type, URL, accessed date, evidence class",1-2,current,yes (source registry),yes,yes,no,
+firmware_skeleton/mif_filter.h,c-header,C reference filter API + honesty comments,3R,current,"yes (C reference, with .c)",yes,no,no,
+firmware_skeleton/mif_filter.c,c-source,C reference filter implementation (host parity build),3R,current,"yes (C reference, with .h)",yes,no,no,No firmware README (gap)
+scripts/download_dataset.py,python,Official Kaggle download; hash verification; manifest write,1,current,yes,yes,yes,no,
+scripts/independent_raw_verification.py,python,Stdlib-only independent recomputation (56 checks),1,current,yes,yes,yes,no,
+scripts/run_data_audit.py,python,Phase-1 audit pipeline,1,current,yes,yes,yes,no,
+scripts/run_phase2_analysis.py,python,Phase-2 analysis pipeline,2,current,yes,yes,yes,no,
+scripts/run_filter_evaluation.py,python,Phase-3 full-data sweep - EXPLORATORY/ORACLE (relabeled 3R),3,current (exploratory label),yes (oracle sweep generation),yes,yes,no,
+scripts/run_leakage_replay.py,python,Phase-3R leakage-controlled replay + T3 horizons,3R,current,yes (replay generation),yes,no,no,Not listed in README repro block (gap)
+scripts/check_c_python_parity.py,python,C/Python parity checker (compile + boundary + official sequence),3R,current,yes (parity),yes,no,no,Not listed in README repro block (gap); needs host cc/gcc
+src/transformer_audit/__init__.py,python,Package exports,1-3R,current,yes,yes,no,no,
+src/transformer_audit/io.py,python,"Raw CSV reading, byte preservation",1,current,yes,yes,no,no,
+src/transformer_audit/timestamps.py,python,Timestamp parsing/canonicalization,1,current,yes,yes,no,no,
+src/transformer_audit/audit.py,python,Phase-1 audit metrics,1,current,yes,yes,yes,no,
+src/transformer_audit/events.py,python,"Event definitions (flags, windows, merge tolerance)",1,current,yes (event definitions),yes,no,no,
+src/transformer_audit/electrical.py,python,Electrical context extraction,1,current,yes,yes,no,no,
+src/transformer_audit/records.py,python,Repeated-record analysis + policies P1-P4,2,current,yes (repeated-record policies),yes,no,no,
+src/transformer_audit/physics.py,python,Conditional physics + apparent tau,2,current,yes (conditional physics),yes,no,no,
+src/transformer_audit/provenance.py,python,"Manifest load/verify, hash gates",1,current,yes,yes,no,no,
+src/transformer_audit/plausibility_filter.py,python,F1/F2/F3/F4 deterministic causal filters,3,current,yes (filter reference),yes,no,no,
+src/transformer_audit/filter_metrics.py,python,"Event-based metrics, zones, baselines, Pareto, cost model",3,current,yes,yes,no,no,
+src/transformer_audit/replay.py,python,"Calibration rules, frozen-threshold replay, CIs, horizons",3R,current,yes (calibration/CI logic),yes,no,no,
+tests/conftest.py,python,Synthetic fixtures; tests never depend on Kaggle download,1,current,yes,yes,no,no,
+tests/test_timestamps.py,python,Timestamp tests,1,current,yes,yes,no,no,
+tests/test_io_and_alignment.py,python,I/O + alignment tests,1,current,yes,yes,no,no,
+tests/test_audit.py,python,Phase-1 audit tests,1,current,yes,yes,no,no,
+tests/test_events.py,python,Event-definition tests,1,current,yes,yes,no,no,
+tests/test_phase2_records_physics.py,python,Phase-2 tests,2,current,yes,yes,no,no,
+tests/test_phase3_plausibility.py,python,Phase-3 filter tests (44),3,current,yes,yes,no,no,
+tests/test_phase3r_leakage.py,python,"Phase-3R tests (24): boundaries, leakage, persistence, CIs, parity, overclaims",3R,current,yes,yes,no,no,
+reports/phase_01_report.md,markdown,Phase-1 report (13 sections),1,current (historical record),yes (phase-1 results),yes,yes,no,degC mentions are caveated historical (A01)
+reports/phase_01_handoff.md,markdown,Phase-1 handoff,1,current (historical),no,yes,yes,no,
+reports/phase_01_code_review.md,markdown,Phase-1 code review (R1 fix),1,current (historical),no,yes,yes,no,
+reports/phase_02_report.md,markdown,Phase-2 report (13 sections),2,current (historical),yes (phase-2 results),yes,yes,no,
+reports/phase_02_handoff.md,markdown,Phase-2 handoff,2,current (historical),no,yes,yes,no,
+reports/phase_03_report.md,markdown,Phase-3 report (10 sections) with 3R relabel banner,3,superseded in part by phase_03r_report,partial,yes,yes,yes,"Body still contains '(54, 236]' (SS1,SS4) and 'jump >= 50' wording and 10/10 oracle numbers without CIs; banner corrects but body text contradicts C38"
+reports/phase_03_handoff.md,markdown,Phase-3 handoff (relabeled item 3),3,superseded by phase_03r_handoff,no,yes,yes,yes,Item 4 contained the F1>10 error (documented in acceptance review)
+reports/phase_03_acceptance_review.md,markdown,Phase-3 acceptance review: verdicts + 10 documented errors,3R,current,yes (phase-3 error record),yes,yes,no,
+reports/phase_03r_report.md,markdown,"Phase-3R report (10 sections): corrections, replay, T1-T3, firmware",3R,current,yes (phase-3R technical content),yes,yes,no,
+reports/phase_03r_handoff.md,markdown,Phase-3R handoff (14 items),3R,current,yes (phase-3R summary),yes,yes,no,
+reports/source_lineage_report.md,markdown,"Source lineage triangle (uploader, Energies use, platform)",2,current,yes (source lineage),yes,yes,no,
+reports/asset_identity_evidence.md,markdown,Asset identity evidence,2,current,yes (asset identity),yes,yes,no,
+reports/asset_parameter_bounds.md,markdown,Asset parameter bounds,2,current,yes,yes,yes,no,
+reports/asset_scope_and_entity_analysis.md,markdown,Entity/scope analysis; C32 statement,2,current,yes (entity scope),yes,yes,no,
+reports/conditional_physics_analysis.md,markdown,Conditional physics analysis (A/B sections),2,current,yes (with physics.py),yes,yes,no,
+reports/variable_semantics_report.md,markdown,"Variable semantics (units unknown, WTI binary)",2,current,yes (variable semantics),yes,yes,no,
+reports/prepublication_inventory.md,markdown,Detailed pre-publication inventory (this task),3R-docs,current,yes (this inventory),yes,no,no,New deliverable
+reports/prepublication_inventory_handoff.md,markdown,Inventory handoff (this task),3R-docs,current,yes (this handoff),yes,no,no,New deliverable
+reports/generated/alarm_summary.csv,csv,Onset counts for OTI_A/OTI_T/MOG_A/WTI flags,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/alternative_explanations.csv,csv,Alternative-explanation ledger with confidence,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/apparent_tau_per_transition.csv,csv,Apparent channel time constant per transition (sensitivity grid),2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/asset_parameter_evidence.csv,csv,Asset parameter evidence table,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/bibliography_register.csv,csv,"Citation metadata register (S-ids, URLs, DOIs, licenses, roles)",2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/computational_cost_comparison.csv,csv,"Op counts, illustrative M0 cycles, state sizes, MLP/GBDT references",3,current,yes (numbers for its scope),yes,no,no,
+reports/generated/cross_file_alignment.csv,csv,Cross-file timestamp alignment,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/dataset_columns_dtypes.csv,csv,Per-file columns and dtypes,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/dataset_inventory.csv,csv,Per-file rows/coverage inventory,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/duplicate_policy_sensitivity.csv,csv,P1-P4 policy sensitivity of excursion findings,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/duplicate_timestamp_report.csv,csv,Duplicate-timestamp report,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/duplicate_timestamp_summary.csv,csv,Duplicate-timestamp summary,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/event_merge_sensitivity.csv,csv,Event counts vs merge tolerance,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/excursion_electrical_context.csv,csv,Electrical context around excursions,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/filter_per_event_detail.csv,csv,Oracle sweep per-event detail (exploratory),3,current,yes (numbers for its scope),yes,no,no,Oracle-sweep artifact; relabeled exploratory
+reports/generated/filter_sweep_summary.csv,csv,"Oracle sweep 1,160-config summary (exploratory)",3,current,yes (numbers for its scope),yes,no,no,Oracle-sweep artifact; relabeled exploratory
+reports/generated/flag_transition_intervals.csv,csv,Flag transition intervals,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/high_oti_duplicate_intersection.csv,csv,High-OTI rows in repeated groups (zero),2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/latent_stream_diagnostics.csv,csv,Occurrence-stream/entity diagnostics,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/manufacturer_spec_envelope.csv,csv,Manufacturer/utility spec envelope (ETT/BSES/IS 1180),2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_autocorrelation.csv,csv,OTI autocorrelation,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_rate_stats.json,json,OTI rate stats,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_rate_summary.csv,csv,OTI rate summary (actual dt),1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_threshold_analysis.csv,csv,OTI threshold/OTI_T rule analysis,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_transition_raw_lines.csv,csv,Raw-line provenance of transitions,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_transitions_phase2.csv,csv,Phase-2 transition catalog with rates,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/oti_value_gaps.csv,csv,"OTI value gaps incl. empty interval (54,236)",1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/overview_value_distributions.csv,csv,Overview value distributions,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/pareto_frontier.csv,csv,Oracle Pareto frontier (exploratory),3,current,yes (numbers for its scope),yes,no,no,Oracle-sweep artifact; relabeled exploratory
+reports/generated/phase_01_summary.json,json,Phase-1 summary + environment,1,current,yes (numbers for its scope),yes,yes,no,
+reports/generated/phase_02_summary.json,json,Phase-2 summary + environment,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/phase_03_filter_summary.json,json,Oracle sweep summary; analysis_type=exploratory_oracle_sensitivity,3,current,yes (numbers for its scope),yes,no,no,Oracle-sweep artifact; relabeled exploratory
+reports/generated/phase_03r_calibration.json,json,Frozen calibration rules/thresholds per view + alarm-excluded sensitivity,3R,current,yes (numbers for its scope),yes,no,no,
+reports/generated/phase_03r_per_event.csv,csv,"Replay per-event: window hit, first alert, persistence k=1/2/3, duty cycle",3R,current,yes (numbers for its scope),yes,no,no,
+reports/generated/phase_03r_replay_metrics.csv,csv,"Replay metrics: recall+CI, row P/R/F1, FA+bootstrap CI, denominators",3R,current,yes (numbers for its scope),yes,no,no,
+reports/generated/phase_03r_summary.json,json,Replay honesty label + calibration summary + multichannel note,3R,current,yes (numbers for its scope),yes,no,no,
+reports/generated/phase_03r_t3_horizons.csv,csv,T3 horizon features 1/6/24h: event vs normal windows,3R,current,yes (numbers for its scope),yes,no,no,
+reports/generated/physics_sensitivity.csv,csv,Conditional physics sensitivity grid,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/power_formula_crosscheck.json,json,KVA vs sum(VLx*ILx) cross-check,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/primitive_events.csv,csv,Primitive flag events,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/repeated_record_conflict_summary.csv,csv,Repeated-record conflict summary,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/repeated_record_conflicts.csv,csv,Repeated-record conflict details,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/repeated_timestamps_shared.csv,csv,Cross-file shared repeated timestamps,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/source_claim_matrix.csv,csv,Source claim matrix SC01-SC03,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/timestamp_interval_summary.csv,csv,Interval distribution summary,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/timestamp_multiplicity.csv,csv,Timestamp multiplicity table,1,current,yes (numbers for its scope),yes,no,no,
+reports/generated/variable_semantics.csv,csv,Variable semantics/domains,2,current,yes (numbers for its scope),yes,no,no,
+reports/generated/documentation_inventory.csv,csv,This documentation inventory,3R-docs,current,yes (numbers for its scope),yes,no,no,
+reports/figures/physics_bounds_achievable_dT.png,png,Achievable dT vs assumptions (conditional physics),2,current,no,yes,no,no,Publication-relevant; caption in phase-02 report
+reports/figures/physics_bounds_critical_mass.png,png,Critical mass bounds (conditional physics),2,current,no,yes,no,no,Publication-relevant; assumption-labeled
+reports/figures/physics_bounds_power_vs_mass.png,png,Power vs mass bounding curves,2,current,no,yes,no,no,Publication-relevant; assumption-labeled
+reports/figures/filter_roc_by_type.png,png,Oracle ROC by filter type,3,current (exploratory),no,yes,no,yes,In-image title lacks EXPLORATORY label; must be relabeled or kept out of publication
+reports/figures/filter_threshold_sensitivity.png,png,Oracle threshold sensitivity panels,3,current (exploratory),no,yes,no,yes,Same in-image label gap
+reports/figures/filter_lead_time_distribution.png,png,Oracle lead-time distribution,3,current (exploratory),no,yes,no,yes,Same in-image label gap
