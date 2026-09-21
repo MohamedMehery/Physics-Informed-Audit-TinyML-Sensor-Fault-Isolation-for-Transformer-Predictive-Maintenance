@@ -4,6 +4,9 @@
 `sreshta140/ai-transformer-monitoring` v1, SHA-256-pinned, gitignored,
 byte-preserved, hash-verified before and after every run.
 
+**Phase-3 commit:** `cddb031` (all code, tests, artifacts, and docs
+below; raw files remain gitignored).
+
 ## What Phase 3 did
 
 1. **Filter family (reference implementation).**
@@ -88,4 +91,7 @@ byte-preserved, hash-verified before and after every run.
     conventions are methodology choices (documented, tested). Cycle
     counts are estimates, not hardware measurements. Paper [NEEDS
     WORK]: broader related-work sweep; optional second dataset for
-    external validity.
+    external validity. **Push to GitHub pending:** three device-flow
+    authorization codes expired unused while the turn was held open;
+    commit `cddb031` is local and intact — re-run the device flow in
+    the next session to push.
