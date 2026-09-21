@@ -1,0 +1,426 @@
+{
+  "P1_preserve": {
+    "cutoff_iso": "2019-07-16 13:38:00",
+    "calibration_records": 2167,
+    "calibration_valid_pairs": 1634,
+    "calibration_oti_max": 47.0,
+    "sensitivity_alarm_excluded": {
+      "note": "SENSITIVITY ONLY - not used for frozen thresholds",
+      "calibration_records": 2163,
+      "thresholds": {
+        "F1_rate": {
+          "primary": 13.5085,
+          "sensitivity:quantile:0.99": 1.0,
+          "sensitivity:quantile:0.9999": 28.6968,
+          "sensitivity:max": 30.0
+        },
+        "F2_upper": {
+          "primary": 45.0,
+          "sensitivity:quantile:0.99": 38.38,
+          "sensitivity:quantile:0.999": 43.838
+        },
+        "F4_jump": {
+          "primary": 31.113,
+          "sensitivity:quantile:0.99": 4.0,
+          "sensitivity:quantile:0.9999": 33.8371,
+          "sensitivity:max": 34.0
+        }
+      }
+    },
+    "rules": {
+      "F1_rate": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      },
+      "F2_upper": {
+        "primary": [
+          "max",
+          null
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.999
+          ]
+        ]
+      },
+      "F4_jump": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      }
+    },
+    "thresholds": {
+      "F1_rate": {
+        "primary": 13.4545,
+        "sensitivity:quantile:0.99": 1.0,
+        "sensitivity:quantile:0.9999": 28.6936,
+        "sensitivity:max": 30.0
+      },
+      "F2_upper": {
+        "primary": 47.0,
+        "sensitivity:quantile:0.99": 39.0,
+        "sensitivity:quantile:0.999": 45.0
+      },
+      "F4_jump": {
+        "primary": 31.101,
+        "sensitivity:quantile:0.99": 4.0,
+        "sensitivity:quantile:0.9999": 33.8367,
+        "sensitivity:max": 34.0
+      }
+    }
+  },
+  "P2_first": {
+    "cutoff_iso": "2019-07-16 13:38:00",
+    "calibration_records": 1649,
+    "calibration_valid_pairs": 1634,
+    "calibration_oti_max": 47.0,
+    "sensitivity_alarm_excluded": {
+      "note": "SENSITIVITY ONLY - not used for frozen thresholds",
+      "calibration_records": 1645,
+      "thresholds": {
+        "F1_rate": {
+          "primary": 24.968,
+          "sensitivity:quantile:0.99": 1.0,
+          "sensitivity:quantile:0.9999": 32.5113,
+          "sensitivity:max": 33.0
+        },
+        "F2_upper": {
+          "primary": 45.0,
+          "sensitivity:quantile:0.99": 39.0,
+          "sensitivity:quantile:0.999": 44.0
+        },
+        "F4_jump": {
+          "primary": 33.0,
+          "sensitivity:quantile:0.99": 4.0,
+          "sensitivity:quantile:0.9999": 33.8371,
+          "sensitivity:max": 34.0
+        }
+      }
+    },
+    "rules": {
+      "F1_rate": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      },
+      "F2_upper": {
+        "primary": [
+          "max",
+          null
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.999
+          ]
+        ]
+      },
+      "F4_jump": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      }
+    },
+    "thresholds": {
+      "F1_rate": {
+        "primary": 24.936,
+        "sensitivity:quantile:0.99": 1.0,
+        "sensitivity:quantile:0.9999": 32.5101,
+        "sensitivity:max": 33.0
+      },
+      "F2_upper": {
+        "primary": 47.0,
+        "sensitivity:quantile:0.99": 41.0,
+        "sensitivity:quantile:0.999": 45.704
+      },
+      "F4_jump": {
+        "primary": 33.0,
+        "sensitivity:quantile:0.99": 4.0,
+        "sensitivity:quantile:0.9999": 33.8367,
+        "sensitivity:max": 34.0
+      }
+    }
+  },
+  "P3_last": {
+    "cutoff_iso": "2019-07-16 13:38:00",
+    "calibration_records": 1649,
+    "calibration_valid_pairs": 1634,
+    "calibration_oti_max": 47.0,
+    "sensitivity_alarm_excluded": {
+      "note": "SENSITIVITY ONLY - not used for frozen thresholds",
+      "calibration_records": 1645,
+      "thresholds": {
+        "F1_rate": {
+          "primary": 13.5085,
+          "sensitivity:quantile:0.99": 1.0,
+          "sensitivity:quantile:0.9999": 28.6968,
+          "sensitivity:max": 30.0
+        },
+        "F2_upper": {
+          "primary": 45.0,
+          "sensitivity:quantile:0.99": 39.0,
+          "sensitivity:quantile:0.999": 44.0
+        },
+        "F4_jump": {
+          "primary": 30.0,
+          "sensitivity:quantile:0.99": 4.0,
+          "sensitivity:quantile:0.9999": 33.3484,
+          "sensitivity:max": 34.0
+        }
+      }
+    },
+    "rules": {
+      "F1_rate": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      },
+      "F2_upper": {
+        "primary": [
+          "max",
+          null
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.999
+          ]
+        ]
+      },
+      "F4_jump": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      }
+    },
+    "thresholds": {
+      "F1_rate": {
+        "primary": 13.4545,
+        "sensitivity:quantile:0.99": 1.0,
+        "sensitivity:quantile:0.9999": 28.6936,
+        "sensitivity:max": 30.0
+      },
+      "F2_upper": {
+        "primary": 47.0,
+        "sensitivity:quantile:0.99": 41.0,
+        "sensitivity:quantile:0.999": 45.704
+      },
+      "F4_jump": {
+        "primary": 30.0,
+        "sensitivity:quantile:0.99": 4.0,
+        "sensitivity:quantile:0.9999": 33.3468,
+        "sensitivity:max": 34.0
+      }
+    }
+  },
+  "P4_identical": {
+    "cutoff_iso": "2019-07-16 13:38:00",
+    "calibration_records": 1703,
+    "calibration_valid_pairs": 1634,
+    "calibration_oti_max": 47.0,
+    "sensitivity_alarm_excluded": {
+      "note": "SENSITIVITY ONLY - not used for frozen thresholds",
+      "calibration_records": 1699,
+      "thresholds": {
+        "F1_rate": {
+          "primary": 13.5085,
+          "sensitivity:quantile:0.99": 1.0,
+          "sensitivity:quantile:0.9999": 28.6968,
+          "sensitivity:max": 30.0
+        },
+        "F2_upper": {
+          "primary": 45.0,
+          "sensitivity:quantile:0.99": 39.0,
+          "sensitivity:quantile:0.999": 44.0
+        },
+        "F4_jump": {
+          "primary": 31.113,
+          "sensitivity:quantile:0.99": 4.0,
+          "sensitivity:quantile:0.9999": 33.8371,
+          "sensitivity:max": 34.0
+        }
+      }
+    },
+    "rules": {
+      "F1_rate": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      },
+      "F2_upper": {
+        "primary": [
+          "max",
+          null
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.999
+          ]
+        ]
+      },
+      "F4_jump": {
+        "primary": [
+          "quantile",
+          0.999
+        ],
+        "sensitivity": [
+          [
+            "quantile",
+            0.99
+          ],
+          [
+            "quantile",
+            0.9999
+          ],
+          [
+            "max",
+            null
+          ]
+        ]
+      }
+    },
+    "thresholds": {
+      "F1_rate": {
+        "primary": 13.4545,
+        "sensitivity:quantile:0.99": 1.0,
+        "sensitivity:quantile:0.9999": 28.6936,
+        "sensitivity:max": 30.0
+      },
+      "F2_upper": {
+        "primary": 47.0,
+        "sensitivity:quantile:0.99": 40.98,
+        "sensitivity:quantile:0.999": 45.596
+      },
+      "F4_jump": {
+        "primary": 31.101,
+        "sensitivity:quantile:0.99": 4.0,
+        "sensitivity:quantile:0.9999": 33.8367,
+        "sensitivity:max": 34.0
+      }
+    }
+  }
+}

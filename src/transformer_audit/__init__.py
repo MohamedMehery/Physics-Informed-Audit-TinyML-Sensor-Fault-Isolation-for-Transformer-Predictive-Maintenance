@@ -38,6 +38,12 @@ from .records import (
 )
 from . import plausibility_filter
 from . import filter_metrics
+from . import replay
+from .replay import (
+    calibrate, split_chronological, guard_no_test_leakage, valid_pairs,
+    quantile, clopper_pearson, day_block_bootstrap, horizon_features,
+    sliding_windows, sustained_alert_times, CAL_RULES, FIRST_CROSSING_ISO,
+)
 from .plausibility_filter import PlausibilityFilter, FilterDecision, FILTER_TYPES
 from .filter_metrics import (
     find_rising_crossings, evaluate_flags, pareto_frontier, build_zone_index,
@@ -68,7 +74,10 @@ __all__ = [
     "neighbor_continuity_fit", "value_band_unimodality", "POLICIES",
     "energy_kj", "critical_mass_kg", "required_power_kw", "achievable_delta_t_units",
     "apparent_time_constant_minutes", "tau_domain_status", "tau_sensitivity",
-    "plausibility_filter", "filter_metrics",
+    "plausibility_filter", "filter_metrics", "replay",
+    "calibrate", "split_chronological", "guard_no_test_leakage",
+    "clopper_pearson", "day_block_bootstrap", "horizon_features",
+    "sliding_windows", "sustained_alert_times", "CAL_RULES",
     "PlausibilityFilter", "FilterDecision",
     "find_rising_crossings", "evaluate_flags", "pareto_frontier", "build_zone_index",
     "normal_zones",

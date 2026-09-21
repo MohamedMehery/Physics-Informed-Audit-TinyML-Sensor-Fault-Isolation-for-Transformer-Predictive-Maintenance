@@ -1,9 +1,10 @@
 # Transformer Monitoring Dataset — Evidence-First Audit
 
-**Status: Phase 3 — deterministic plausibility filter: design, systematic
-evaluation, baselines, cost** (complete; see `reports/phase_03_report.md`
-and `reports/phase_03_handoff.md`; Phases 1–2 also complete:
-`reports/phase_01_report.md`, `reports/phase_02_report.md`)
+**Status: Phase 3R — leakage-controlled evaluation and claim
+correction** (complete; see `reports/phase_03r_report.md` and
+`reports/phase_03r_handoff.md`; Phases 1–3 also complete:
+`reports/phase_01_report.md`, `reports/phase_02_report.md`,
+`reports/phase_03_report.md`)
 
 An evidence-first investigation of the public Kaggle dataset
 **"Distributed Transformer Monitoring"**, focused on data quality,
@@ -42,51 +43,71 @@ physics. This repository deliberately separates what is *known* from what is
   vs 0.142 MW observed. Apparent channel recovery τ = 0.5–26 min. No root
   cause claimed; sampled data cannot exclude unobserved sub-interval events.
 
-## Phase 3 — deterministic plausibility filter (design, evaluation, cost)
+## Phase 3 / 3R — deterministic plausibility filter: design, evaluation, claim correction
 
 A family of **deterministic, causal, streaming plausibility filters**
 (F1 rate, F2 range, F3 combined, F4 jump; 1–11 operations/sample,
-2–16 bytes of state, pure-stdlib reference implementation) was designed,
-evaluated over the **full dataset under all four record policies**, and
-compared against three baselines. Full details:
-`reports/phase_03_report.md`; paper plan: `docs/paper_outline.md`.
+pure-stdlib reference implementation + C skeleton with host parity) was
+designed, evaluated, and then **repaired in Phase 3R** after an
+acceptance review found that the original threshold selection used the
+full dataset. Full details: `reports/phase_03_report.md`,
+`reports/phase_03r_report.md`, `reports/phase_03_acceptance_review.md`;
+paper plan: `paper/outline.md`.
 
-**Phase-3 headline results (all reproducible, `reports/generated/`):**
+**Phase-3R headline results (frozen-threshold chronological replay;
+`reports/generated/phase_03r_*.csv/json`):**
 
-- **Event-based evaluation:** 10 rising band-crossings into OTI ≥ 236
-  (all four policies yield the same 10 events); detection = flag at or
-  before the event's first OTI ≥ 236 sample within a bounded 60-min
-  pre-window; false alarms counted as contiguous **episodes** per day of
-  normal operation (292.6 days); lead times from actual timestamps.
-  1,160 configurations swept; detection is **policy-invariant**.
-- **Concurrent detection with zero false alarms is achievable by simple
-  means:** F2 (upper threshold anywhere in (54, 236]) and F4 (jump ≥ 50)
-  detect 10/10 events concurrently (lead 0) with 0 false-alarm episodes,
-  flagging exactly the 47 excursion samples / the 20 excursion steps.
-- **No multi-hour early warning exists in this export.** The maximum
-  genuine pre-crossing lead is 48 min on one event (F2 OTI>45,
-  0.23 FA episodes/day); at OTI>50, two of ten events are preceded by
-  27–37 min by elevated-normal-band values (50–54 OTI units — the top
-  0.4 % of normal operation) at 0.055 FA episodes/day; the median event
-  lead is 0 everywhere. Nothing above 54 OTI units appears in any
-  60-min pre-window. The value of these filters is **concurrent
-  sensor-integrity flagging at negligible compute, not prediction**.
-- **Baselines:** B1 (trivial OTI ≥ 236) detects 10/10 by construction;
-  B2 (seeded random) is dominated everywhere; B3 (static percentile,
-  non-causal) reproduces the F2 sub-band operating points.
-- **Cost:** exact op counts; Cortex-M0 cycle *estimates* from documented
-  instruction-timing tables (~18–30 cycles/sample fixed-point,
-  ~37–291 soft-float) vs a 584-MAC MLP (~3.5k/~62k cycles) and a
-  100-tree GBDT (~152 KB). Within the documented capabilities of the
-  Cortex-M0 class; **no claim about any specific board is made**.
+- **Leakage control:** thresholds are frozen from a calibration window
+  strictly before the first excursion (2019-07-16 13:38) using
+  predefined quantile/max rules, then replayed unchanged on all later
+  records. This is a post-hoc leakage-controlled replay — internal
+  validation only, not truly prospective external validation.
+- **Replay results (all four views P1–P4, both gap behaviors):**
+  range (upper = calibration max 47) and jump (calibration q99.9) rules
+  flag 10/10 events at or before the crossing sample (exact 95% CI
+  [0.69, 1.00]; n = 10), range at 0.26 false-alert episodes/day
+  (day-block bootstrap CI [0.18, 0.34]), jump at 0.0; rate rules
+  calibrated to pre-event noise flag 9/10 under P1/P3/P4 and 5/10 under
+  P2_first (view-dependent). Persistence requirements (2, 3 valid
+  samples) eliminate isolated single-sample alerts.
+- **Exploratory / oracle sensitivity analysis (clearly separated):** the
+  earlier 1,160-configuration full-data sweep remains available but is
+  labeled exploratory — thresholds there were chosen with full-dataset
+  knowledge (normal max 54, event min 236) and it is not held-out
+  validation. Verified boundary facts: F2 zero-false-alarm separation
+  holds for upper thresholds in [54, 236) (not (54, 236]); F4 for
+  [42, 182); rate thresholds > 14.5 (not > 10) miss the two slowest
+  rises (11.1 and 14.5 OTI-units/min both exceed 10).
+- **T1/T2/T3 task separation:** T1 — OTI ⟺ OTI_T same-sample rule
+  equivalence (not prediction). T2 — concordance with operationally
+  defined band-crossing events; **no field-confirmed sensor-fault labels
+  exist**, so no validated physical-fault detection is claimed. T3 —
+  causal early-warning exploration restricted to tested variables, rules,
+  and horizons: the tested OTI-only deterministic rules did not
+  demonstrate robust multi-hour warning (1/6/24 h horizons; slope,
+  variability, and sampling-gap features flagged 0/10 event windows).
+  No multivariate early-warning conclusion is possible (other channels
+  not evaluated in T3). The Energies 24-hour statement was **not
+  reproduced by this project** (its features, task, split, and
+  evaluation were not reproduced either; no judgment on its validity).
+- **Firmware:** `firmware_skeleton/mif_filter.{h,c}` compiles at
+  -Wall -Wextra -Werror -O2; the C reference matches the Python
+  reference on boundary vectors and the full official replay sequence
+  (19,376 samples × 4 filters × 2 gap behaviors, 0 mismatches);
+  compiled `sizeof(mif_filter_t)` = 72 bytes (host double reference).
+  Cycle counts remain illustrative estimates from documented
+  instruction-timing tables — no Cortex-M0 cross-compiler or board was
+  used, so nothing is a measured MCU latency. Hypothetical MLP/GBDT
+  comparisons are kept out of headline results.
 
-**Phase-3 terminology (enforced by tests):** the filters flag readings
+**Standing Phase-3R wording (tested):** entity identity remains
+unresolved; the OTI engineering unit is unconfirmed; events are
+operationally defined from the export; the hardware root cause is
+unknown; the full-data sweep is exploratory; the frozen-threshold
+replay is internal validation only. The filters flag readings
 *inconsistent with gradual thermal behavior* at the measurement-channel
-level; they do **not** "detect faults" or "sensor failures," they are
-not "TinyML"/"AI"/"intelligent" (no learning anywhere), the root cause
-of flagged behavior is unknown, and all values are in "OTI units".
-All Phase-2 caveats (units unknown, entity unresolved, conditional
-physics labels) remain in force.
+level — they are not "TinyML"/AI/intelligent, and all values are in
+"OTI units". All Phase-2 caveats remain in force.
 
 ## Dataset (primary source)
 
@@ -127,8 +148,8 @@ Kaggle, version 1 (2020), https://www.kaggle.com/datasets/sreshta140/ai-transfor
    the OTI value discontinuity look like, at what rates (using *actual*
    Δt), and is anything visible in the electrical channels around them?
 5. **Interpretation discipline:** Which conclusions are permitted by the
-   evidence, and which popular claims (specific nameplates, cooling classes,
-   sensor failures, "TinyML" labels) are unsupported?
+   evidence, and which popular claims (specific nameplates, cooling
+   classes, sensor-failure stories, trendy ML labels) go beyond it?
 
 ## Evidence classification
 
@@ -277,7 +298,7 @@ Phase 1 by design.
 cause (ADC railing, sensor open-circuit, etc.), any transformer
 specification beyond the confirmed data structure, any "TinyML" solution
 (no ML model is trained here — deterministic checks would be
-physics-informed edge rules at most), and any invalidation of third-party
+physics-informed edge rules at most), and any rebuttal of third-party
 published ML results (none was independently reproduced here).
 
 ## History note

@@ -5,6 +5,19 @@ reproducible from this repository (`scripts/run_filter_evaluation.py`,
 provenance-gated before and after the run). Raw files are byte-preserved
 and gitignored; every number below comes from a committed artifact.
 
+> **PHASE-3R STATUS LABEL (supersedes the original framing).** The
+> 1,160-configuration sweep in this report is an **exploratory / oracle
+> sensitivity analysis**: thresholds were selected with knowledge of the
+> full dataset (normal maximum 54, event minimum 236) and it is **not**
+> held-out detector validation. The leakage-controlled chronological
+> replay with frozen calibration-derived thresholds is in
+> `reports/phase_03r_report.md`. Corrections verified in Phase 3R: the
+> F2 zero-false-alarm separation interval is **[54, 236)** (not
+> (54, 236] — at U = 236 the strict rule misses the OTI = 236 crossing
+> sample), the F4 interval is [42, 182), and F1 misses the two slowest
+> rises only for thresholds > 14.5 (not > 10: 11.1 and 14.5 both exceed
+> 10).
+
 Standing terminology: the filter flags readings **inconsistent with
 gradual thermal behavior** at the measurement-channel level. It does not
 "detect faults" or "detect sensor failures," the root cause of every
@@ -81,7 +94,7 @@ Edge-case contract (each case unit-tested):
 - gap > 60 min → `reset` (treat next sample as first) or `continue`
   (evaluate across the gap); both behaviors swept.
 
-## 3. Evaluation protocol (spec C)
+## 3. Evaluation protocol (spec C) — exploratory / oracle sensitivity
 
 - **Series**: each policy's retained records, ordered by
   (timestamp, raw line); timestamps as float minutes.
@@ -111,7 +124,7 @@ Edge-case contract (each case unit-tested):
 - **Provenance gates** before and after the run: all raw-file SHA-256
   hashes match the manifest.
 
-## 4. Results — detection and false alarms (full sweep)
+## 4. Results — detection and false alarms (full sweep; exploratory / oracle sensitivity, not held-out validation)
 
 `reports/generated/filter_sweep_summary.csv` (1,160 rows);
 `filter_per_event_detail.csv` (11,600 event evaluations).

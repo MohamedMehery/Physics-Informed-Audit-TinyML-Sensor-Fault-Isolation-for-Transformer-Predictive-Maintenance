@@ -1,5 +1,7 @@
 {
-  "phase3_run_utc": "2026-09-21T08:11:09Z",
+  "phase3_run_utc": "2026-09-21T09:40:09Z",
+  "analysis_type": "exploratory_oracle_sensitivity",
+  "analysis_status": "thresholds chosen with full-dataset knowledge; NOT held-out validation; see phase_03r_* artifacts for the leakage-controlled replay",
   "events_per_policy": {
     "P1_preserve": 10,
     "P2_first": 10,

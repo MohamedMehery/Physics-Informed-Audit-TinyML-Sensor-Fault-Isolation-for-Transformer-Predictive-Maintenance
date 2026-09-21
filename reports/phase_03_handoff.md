@@ -30,7 +30,10 @@ below; raw files remain gitignored).
    (actual timestamps); false alarms = contiguous episodes in normal
    operation (292.625 days), per day.
 
-3. **Systematic sweep, full dataset, all policies.**
+3. **Systematic sweep, full dataset, all policies — relabeled in
+   Phase 3R as an EXPLORATORY / ORACLE SENSITIVITY ANALYSIS (thresholds
+   chosen with full-dataset knowledge; not held-out validation; see
+   `reports/phase_03r_handoff.md`).**
    `scripts/run_filter_evaluation.py`: 1,160 configurations (F1 × 8
    thresholds, F2 × 13, F4 × 7, F3 8×13 grid, × reset/continue ×
    P1–P4) + baselines; provenance gates pre/post. Outputs:

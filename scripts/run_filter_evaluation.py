@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-"""Phase-3 evaluation: deterministic plausibility filters under P1-P4.
+"""Phase-3 EXPLORATORY / ORACLE SENSITIVITY ANALYSIS (full-data sweep).
+
+STATUS LABEL (Phase 3R): this 1,160-configuration sweep selects and
+evaluates thresholds with knowledge of the FULL dataset (including the
+full-data normal maximum 54 and the event minimum 236). It is an
+exploratory/oracle sensitivity analysis and must NOT be presented as
+held-out detector validation. The leakage-controlled chronological
+replay lives in scripts/run_leakage_replay.py.
+
+Original Phase-3 description: deterministic plausibility filters under
+P1-P4.
 
 Rules baked in (Phase-3 protocol):
 - filters are the deterministic, causal, stdlib-only implementations in
@@ -363,6 +373,11 @@ def main() -> int:
     # ---- summary json ------------------------------------------------------
     headline = {
         "phase3_run_utc": utc_now_iso(),
+        "analysis_type": "exploratory_oracle_sensitivity",
+        "analysis_status": ("thresholds chosen with full-dataset knowledge; "
+                            "NOT held-out validation; see "
+                            "phase_03r_* artifacts for the leakage-controlled "
+                            "replay"),
         "events_per_policy": policy_events,
         "pre_window_minutes": PRE_WINDOW_MIN,
         "detection_policy_invariant": sorted(

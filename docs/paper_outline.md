@@ -1,5 +1,11 @@
 # Paper Outline (Phase 3)
 
+> **SUPERSEDED by `paper/outline.md` (Phase 3R revision).** The Phase-3R
+> package reorders evidence (leakage-controlled replay primary; oracle
+> sweep exploratory), adds the T1/T2/T3 task separation, and corrects
+> the boundary and early-warning wording. This file is retained for
+> history; do not cite it for current claims.
+
 Working title (conservative, no unearned terms):
 
 > **"Auditing a Public Distributed-Transformer-Monitoring Dataset: Record
