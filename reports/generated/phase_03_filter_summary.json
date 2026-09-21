@@ -1,0 +1,123 @@
+{
+  "phase3_run_utc": "2026-09-21T08:11:09Z",
+  "events_per_policy": {
+    "P1_preserve": 10,
+    "P2_first": 10,
+    "P3_last": 10,
+    "P4_identical": 10
+  },
+  "pre_window_minutes": 60.0,
+  "detection_policy_invariant": [
+    1.0
+  ],
+  "notable_configs_P2_reset": [
+    {
+      "filter_type": "F1_rate",
+      "threshold": "rate>2",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.044425
+    },
+    {
+      "filter_type": "F1_rate",
+      "threshold": "rate>5",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.013669
+    },
+    {
+      "filter_type": "F1_rate",
+      "threshold": "rate>10",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.010252
+    },
+    {
+      "filter_type": "F2_range",
+      "threshold": "OTI>50",
+      "detected": 10,
+      "mean_lead_min": 6.4,
+      "fa_per_day": 0.054677
+    },
+    {
+      "filter_type": "F2_range",
+      "threshold": "OTI>52",
+      "detected": 10,
+      "mean_lead_min": 0.7,
+      "fa_per_day": 0.010252
+    },
+    {
+      "filter_type": "F2_range",
+      "threshold": "OTI>54",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.0
+    },
+    {
+      "filter_type": "F2_range",
+      "threshold": "OTI>236",
+      "detected": 9,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.0
+    },
+    {
+      "filter_type": "F4_jump",
+      "threshold": "|dOTI|>50",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.0
+    },
+    {
+      "filter_type": "F3_combined",
+      "threshold": "rate>2;OTI>50",
+      "detected": 10,
+      "mean_lead_min": 6.4,
+      "fa_per_day": 0.099103
+    },
+    {
+      "filter_type": "F3_combined",
+      "threshold": "rate>5;OTI>50",
+      "detected": 10,
+      "mean_lead_min": 6.4,
+      "fa_per_day": 0.068347
+    },
+    {
+      "filter_type": "B1_trivial",
+      "threshold": "OTI>=236",
+      "detected": 10,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.0
+    },
+    {
+      "filter_type": "B3_percentile",
+      "threshold": ">p95",
+      "detected": 10,
+      "mean_lead_min": 24.0,
+      "fa_per_day": 0.464759
+    },
+    {
+      "filter_type": "B3_percentile",
+      "threshold": ">p99",
+      "detected": 10,
+      "mean_lead_min": 9.5,
+      "fa_per_day": 0.140111
+    },
+    {
+      "filter_type": "B3_percentile",
+      "threshold": ">p99.5",
+      "detected": 10,
+      "mean_lead_min": 6.4,
+      "fa_per_day": 0.054677
+    },
+    {
+      "filter_type": "B3_percentile",
+      "threshold": ">p99.9",
+      "detected": 5,
+      "mean_lead_min": 0.0,
+      "fa_per_day": 0.0
+    }
+  ],
+  "max_lead_time_min_over_all_filters": 38.333,
+  "n_configs": 1160,
+  "pareto_points": 88
+}

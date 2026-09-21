@@ -1,9 +1,9 @@
 # Transformer Monitoring Dataset — Evidence-First Audit
 
-**Status: Phase 2 — single-asset validity, source lineage, and conditional
-physics** (complete; see `reports/phase_02_report.md` and
-`reports/phase_02_handoff.md`; Phase 1 data/provenance audit also complete,
-`reports/phase_01_report.md`)
+**Status: Phase 3 — deterministic plausibility filter: design, systematic
+evaluation, baselines, cost** (complete; see `reports/phase_03_report.md`
+and `reports/phase_03_handoff.md`; Phases 1–2 also complete:
+`reports/phase_01_report.md`, `reports/phase_02_report.md`)
 
 An evidence-first investigation of the public Kaggle dataset
 **"Distributed Transformer Monitoring"**, focused on data quality,
@@ -41,6 +41,52 @@ physics. This repository deliberately separates what is *known* from what is
   distribution-class oil masses; plausible masses need sustained 0.1–4.9 MW
   vs 0.142 MW observed. Apparent channel recovery τ = 0.5–26 min. No root
   cause claimed; sampled data cannot exclude unobserved sub-interval events.
+
+## Phase 3 — deterministic plausibility filter (design, evaluation, cost)
+
+A family of **deterministic, causal, streaming plausibility filters**
+(F1 rate, F2 range, F3 combined, F4 jump; 1–11 operations/sample,
+2–16 bytes of state, pure-stdlib reference implementation) was designed,
+evaluated over the **full dataset under all four record policies**, and
+compared against three baselines. Full details:
+`reports/phase_03_report.md`; paper plan: `docs/paper_outline.md`.
+
+**Phase-3 headline results (all reproducible, `reports/generated/`):**
+
+- **Event-based evaluation:** 10 rising band-crossings into OTI ≥ 236
+  (all four policies yield the same 10 events); detection = flag at or
+  before the event's first OTI ≥ 236 sample within a bounded 60-min
+  pre-window; false alarms counted as contiguous **episodes** per day of
+  normal operation (292.6 days); lead times from actual timestamps.
+  1,160 configurations swept; detection is **policy-invariant**.
+- **Concurrent detection with zero false alarms is achievable by simple
+  means:** F2 (upper threshold anywhere in (54, 236]) and F4 (jump ≥ 50)
+  detect 10/10 events concurrently (lead 0) with 0 false-alarm episodes,
+  flagging exactly the 47 excursion samples / the 20 excursion steps.
+- **No multi-hour early warning exists in this export.** The maximum
+  genuine pre-crossing lead is 48 min on one event (F2 OTI>45,
+  0.23 FA episodes/day); at OTI>50, two of ten events are preceded by
+  27–37 min by elevated-normal-band values (50–54 OTI units — the top
+  0.4 % of normal operation) at 0.055 FA episodes/day; the median event
+  lead is 0 everywhere. Nothing above 54 OTI units appears in any
+  60-min pre-window. The value of these filters is **concurrent
+  sensor-integrity flagging at negligible compute, not prediction**.
+- **Baselines:** B1 (trivial OTI ≥ 236) detects 10/10 by construction;
+  B2 (seeded random) is dominated everywhere; B3 (static percentile,
+  non-causal) reproduces the F2 sub-band operating points.
+- **Cost:** exact op counts; Cortex-M0 cycle *estimates* from documented
+  instruction-timing tables (~18–30 cycles/sample fixed-point,
+  ~37–291 soft-float) vs a 584-MAC MLP (~3.5k/~62k cycles) and a
+  100-tree GBDT (~152 KB). Within the documented capabilities of the
+  Cortex-M0 class; **no claim about any specific board is made**.
+
+**Phase-3 terminology (enforced by tests):** the filters flag readings
+*inconsistent with gradual thermal behavior* at the measurement-channel
+level; they do **not** "detect faults" or "sensor failures," they are
+not "TinyML"/"AI"/"intelligent" (no learning anywhere), the root cause
+of flagged behavior is unknown, and all values are in "OTI units".
+All Phase-2 caveats (units unknown, entity unresolved, conditional
+physics labels) remain in force.
 
 ## Dataset (primary source)
 
@@ -110,6 +156,7 @@ python scripts/download_dataset.py       # official Kaggle download; verifies ha
                                          # extracts raw/ (gitignored); writes manifest
 python scripts/run_data_audit.py         # Phase-1 audit -> reports/generated/*.csv|json
 python scripts/run_phase2_analysis.py    # Phase-2 analysis -> generated CSVs + figures
+python scripts/run_filter_evaluation.py  # Phase-3 filter sweep (1,160 configs, provenance-gated)
 python scripts/independent_raw_verification.py  # stdlib-only recomputation; 56 checks;
                                                  # exits non-zero on any disagreement
 python -m pytest                         # 69 synthetic-fixture unit tests
@@ -142,6 +189,7 @@ scripts/
   download_dataset.py         official download + hash verify + manifest
   run_data_audit.py           Phase-1 audit
   run_phase2_analysis.py      Phase-2 analysis (artifacts + figures)
+  run_filter_evaluation.py    Phase-3 filter sweep + baselines + cost table
   independent_raw_verification.py  stdlib-only cross-check (56 checks)
 tests/                        69 unit tests (synthetic fixtures only)
 docs/outreach_requests.md     provider/uploader question drafts — NOT SENT
@@ -156,6 +204,8 @@ reports/
   asset_parameter_bounds.md           parameters + official manufacturer envelope
   conditional_physics_analysis.md     assumption-labeled energy/tau bounds
   phase_02_report.md         detailed Phase-2 report (13 sections)
+  phase_03_report.md         Phase-3 filter report (10 sections)
+  phase_03_handoff.md        compact Phase-3 handoff
   phase_02_handoff.md        compact Phase-2 handoff
   figures/                   physics bounds figures (PNG)
   generated/                 machine-readable audit outputs (CSV/JSON)

@@ -36,6 +36,15 @@ from .records import (
     apply_policy, policy_metrics, policy_sensitivity, occurrence_report,
     neighbor_continuity_fit, value_band_unimodality, POLICIES,
 )
+from . import plausibility_filter
+from . import filter_metrics
+from .plausibility_filter import PlausibilityFilter, FilterDecision, FILTER_TYPES
+from .filter_metrics import (
+    find_rising_crossings, evaluate_flags, pareto_frontier, build_zone_index,
+    normal_zones,
+    b1_trivial_threshold_flags, b2_random_flags, b3_percentile_flags,
+    OP_COUNTS, est_cycles_m0, mlp_28_16_8_1, gbdt_100_trees, total_ops,
+)
 from .physics import (
     energy_kj, critical_mass_kg, required_power_kw, achievable_delta_t_units,
     apparent_time_constant_minutes, tau_domain_status, tau_sensitivity,
@@ -59,4 +68,10 @@ __all__ = [
     "neighbor_continuity_fit", "value_band_unimodality", "POLICIES",
     "energy_kj", "critical_mass_kg", "required_power_kw", "achievable_delta_t_units",
     "apparent_time_constant_minutes", "tau_domain_status", "tau_sensitivity",
+    "plausibility_filter", "filter_metrics",
+    "PlausibilityFilter", "FilterDecision",
+    "find_rising_crossings", "evaluate_flags", "pareto_frontier", "build_zone_index",
+    "normal_zones",
+    "b1_trivial_threshold_flags", "b2_random_flags", "b3_percentile_flags",
+    "OP_COUNTS", "est_cycles_m0", "mlp_28_16_8_1", "gbdt_100_trees", "total_ops",
 ]
