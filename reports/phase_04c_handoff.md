@@ -9,7 +9,7 @@ experiments, no scientific-content changes, nothing sent.
 
 **2. Commit hashes.** DOI propagation: `68a1d1e` ("Add Zenodo DOI for
 v0.1.0 (post-release metadata)"). Outreach finalization + this
-handoff: `__4C_HASH__` (hash recorded in the follow-up commit,
+handoff: `59f5028173ed844954386399b9a9d5f08494535e` (hash recorded in the follow-up commit,
 Phase-3R/4B precedent). Both pushed to origin/main.
 
 **3. Files touched (DOI propagation).** `README.md` (Zenodo badge under
