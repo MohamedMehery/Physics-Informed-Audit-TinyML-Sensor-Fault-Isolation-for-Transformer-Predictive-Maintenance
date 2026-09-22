@@ -8,8 +8,8 @@
   reviewed.**
 - **Code:** https://github.com/MohamedMehery/transformer-telemetry-integrity-audit
   (release v0.1.0)
-- **DOI:** to be minted via Zenodo for release v0.1.0 (placeholder — this
-  report will be updated with the DOI after archival)
+- **DOI:** 10.5281/zenodo.22904790 (https://doi.org/10.5281/zenodo.22904790 — Zenodo
+  archive of release v0.1.0)
 - **Licensing:** code Apache-2.0 (`LICENSE`); documentation, reports,
   figures, and this report CC BY 4.0 (`CONTENT_LICENSE.md`)
 
@@ -407,7 +407,7 @@ every script run and abort on any mismatch.
   this repository" button) — Mohamed Mehery, Independent Researcher,
   *Transformer Telemetry Integrity Audit*, v0.1.0, 2026-09-21,
   https://github.com/MohamedMehery/transformer-telemetry-integrity-audit.
-  DOI to be added after Zenodo archival of release v0.1.0.
+  DOI: 10.5281/zenodo.22904790 (https://doi.org/10.5281/zenodo.22904790 — Zenodo archive of release v0.1.0).
 - **Licensing:** code Apache-2.0 (`LICENSE`); documentation, reports,
   figures, and this report CC BY 4.0 (`CONTENT_LICENSE.md`,
   `NOTICE`).

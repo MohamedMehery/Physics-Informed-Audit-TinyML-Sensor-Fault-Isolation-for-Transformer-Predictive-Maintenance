@@ -8,6 +8,8 @@ an evidence-first audit of the public Kaggle dataset "Distributed
 Transformer Monitoring" plus a deterministic plausibility filter with
 leakage-controlled evaluation. **It is not peer reviewed.**
 
+- **DOI:** 10.5281/zenodo.22904790 (https://doi.org/10.5281/zenodo.22904790)
+
 ## What is included
 
 - **Phase 1 — data audit:** provenance verification (official Kaggle
@@ -63,8 +65,6 @@ leakage-controlled evaluation. **It is not peer reviewed.**
 - **Figures F1–F3** (OTI series, replay alert classes, T3 horizons):
   not generated in v0.1.0; the technical report presents their content
   as tables instead (`paper/figures_tables_inventory.md`).
-- **DOI:** pending — to be minted by Zenodo when release v0.1.0 is
-  archived (`.zenodo.json` is in place; no DOI is fabricated here).
 - **Peer review.** None has occurred.
 - **Outreach.** None has been sent (`docs/outreach_requests.md` drafts
   are stored only; outreach waits until after publication + DOI).
@@ -107,4 +107,5 @@ reproduced either; no judgment on its validity). Full list:
 
 See `CITATION.cff` (or the GitHub "Cite this repository" button):
 Mohamed Mehery, *Transformer Telemetry Integrity Audit*, v0.1.0,
-2026-09-21. The dataset must be cited separately (see `README.md`).
+2026-09-21. https://doi.org/10.5281/zenodo.22904790. The dataset must be cited separately (see
+`README.md`).

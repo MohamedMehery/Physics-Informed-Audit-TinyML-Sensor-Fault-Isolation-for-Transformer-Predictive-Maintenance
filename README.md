@@ -1,5 +1,7 @@
 # Transformer Monitoring Dataset — Evidence-First Audit
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22904790.svg)](https://doi.org/10.5281/zenodo.22904790)
+
 **Status: Phase 3R — leakage-controlled evaluation and claim
 correction** (complete; see `reports/phase_03r_report.md` and
 `reports/phase_03r_handoff.md`; Phases 1–2:
@@ -343,3 +345,23 @@ fabricated. See `docs/archive/README_initial_unverified.md` and
 
 - **Code License:** [Apache License 2.0](LICENSE)
 - **Documentation & Reports:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+
+**How to cite (v0.1.0):**
+
+> Mehery, M. (2026). *Transformer Telemetry Integrity Audit*
+> (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.22904790
+
+```bibtex
+@misc{mehery2026transformer,
+  author = {Mehery, Mohamed},
+  title = {Transformer Telemetry Integrity Audit},
+  year = {2026},
+  month = sep,
+  version = {0.1.0},
+  doi = {10.5281/zenodo.22904790},
+  url = {https://doi.org/10.5281/zenodo.22904790}
+}
+```
+
+See also `CITATION.cff` (GitHub "Cite this repository" button). The
+Kaggle dataset must be cited separately — see the Dataset section.
